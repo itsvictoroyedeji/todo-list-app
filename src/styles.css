@@ -89,12 +89,19 @@ body {
   --main-background-base-secondary: #fcfaf8;
   --font-size-body: 0.95em;
   --content-primary: #202020;
-  --text-secondary-color: #555;
-  --sidebar-spacing-xsmall: 0.2em;
+  --text-secondary-color: #667;
+  --sidebar-spacing-xsmall: 0.3em;
   --sidebar-spacing-small: 0.5em;
   --sidebar-spacing-medium: 0.9em;
   --sidebar-spacing-large: 1em;
-  --sidebar-border-radius-small: 5px; 
+  --sidebar-border-radius-small: 5px;
+  --main-spacing-xsmall: 0.3em;
+  --main-spacing-small: 0.5em;
+  --main-spacing-medium: 0.9em;
+  --main-spacing-large: 1em;
+  --main-spacing-xlarge: 1.2em;
+  --main-border-radius-small: 5px;
+  --main-view-header-height: calc(56px + 0px);
   --transparent-color: transparent;
   --button-font-size: 0.9rem;
   --button-height: 2em;
@@ -106,6 +113,12 @@ body {
   --font-weight-medium: 600;
   --menu-button-width: 24px;
   --sidebar-item-hover: #f2efed;
+  --main-item-hover: #f2efed;
+  --sidebar-toggle-transition-duration: 0.3s;
+  --sidebar-toggle-transition-function: cubic-bezier(.4,0,.2,1);
+  --main-button-hover-text: #1a1a1a;
+  --main-button-hover-background: rgba(0,0,0,.04);
+
 }
 
 #todolist_app {
@@ -399,3 +412,126 @@ a {
   position: relative;
   container: multi-select-container/inline-size;
 }
+
+#content {
+  background: var(--main-background-base-primary);
+  border-color: var(--main-background-base-primary);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 380px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: opacity .25s cubic-bezier(.4,0,.6,1);
+}
+
+.main-container > main {
+  height: 100%;
+  scroll-padding: var(--main-view-header-height)0 var(--main-spacing-xlarge);
+}
+
+.my-project-view-container {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  height: 100%;
+}
+
+.my-project-view-container-2 {
+  width: 100%;
+  flex: auto;
+  display: flex;
+  flex-wrap: nowrap;
+} 
+
+.my-project-view-container-3 {
+  height: 100%;
+  min-width: 0;
+  align-self: stretch;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.my-project-view {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.projects-container-header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 56px;
+  z-index: 3;
+  grid-gap: var(--main-spacing-small);
+  align-items: stretch;
+  top: 0;
+  border-bottom: 1px solid transparent;
+  padding-left: var(--main-spacing-medium);
+  padding-right: var(--main-spacing-medium);
+  flex-shrink: 0;
+  position: sticky;
+  position: -webkit-sticky;
+}
+
+.projects-breadcrumbs {
+  grid-column: 1;
+  transition: margin-left var(--sidebar-toggle-transition-duration) var(--sidebar-toggle-transition-function);
+  margin-left: 0;
+  align-items: center;
+  display: flex;
+}
+
+.my-projects-breadcrumb {
+  padding: 0 var(--main-spacing-xsmall);
+  border: 0;
+  color: var(--text-secondary-color);
+  background-color: transparent;
+  height: var(--button-height);
+  font-size: calc(var(--button-font-size) - 1px);
+  min-width: 0 !important;
+  line-height: var(--button-height);
+  width: auto;
+}
+
+.my-projects-breadcrumb span {
+  pointer-events: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: inherit;
+  text-align: center;
+  overflow: hidden;
+}
+
+.my-projects-slash {
+  color: var(--text-secondary-color);
+}
+
+.projects-menu-items {
+  grid-column: 3;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.projects-menu-items button:hover {
+  color: var(--main-button-hover-text);
+  background-color: var(--main-button-hover-background)
+}
+
+.edit-project-button,
+.delete-project-button {
+  color: var(--text-secondary-color);
+  font-size: calc(var(--button-font-size) - 1px);
+}
+
+.edit-project-button span,
+.delete-project-button span {
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: inherit;
+}
+
