@@ -118,7 +118,8 @@ body {
   --sidebar-toggle-transition-function: cubic-bezier(.4,0,.2,1);
   --main-button-hover-text: #1a1a1a;
   --main-button-hover-background: rgba(0,0,0,.04);
-
+  --main-container-side-padding: 3.4em;
+  --main-container-max-width: 800px;
 }
 
 #todolist_app {
@@ -535,3 +536,29 @@ a {
   font-size: inherit;
 }
 
+.large-header-container {
+  transition: opacity .5s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.large-header-container-2 {
+  margin: 6px var(--main-container-side-padding) 9px;
+  max-width: var(--main-container-max-width);
+  gap: var(--main-spacing-small);
+  width: 100%;
+  flex-grow: 1;
+}
+
+.large-header-text {
+  line-height: 35px;
+  font-weight: 700;
+  font-size: 1.7rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}
+
+.project-list-view-container {
+  
+}
