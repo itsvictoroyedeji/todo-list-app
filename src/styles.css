@@ -120,6 +120,12 @@ body {
   --main-button-hover-background: rgba(0,0,0,.04);
   --main-container-side-padding: 3.4em;
   --main-container-max-width: 800px;
+  --main-container-divider: #eee;
+  --main-circle-diameter: 18px;
+  --check: #999;
+  --tint: #999;
+  --animation-shortest: .15s;
+  --ease-in: cubic-bezier(.4,0,1,1);
 }
 
 #todolist_app {
@@ -536,6 +542,10 @@ a {
   font-size: inherit;
 }
 
+.delete-project-button span {
+  color: var(--lighter-red);
+}
+
 .large-header-container {
   transition: opacity .5s ease-out;
   display: flex;
@@ -560,5 +570,158 @@ a {
 }
 
 .project-list-view-container {
-  
+  min-height: 86px;
+  padding-left: var(--main-container-side-padding);
+  padding-right: var(--main-container-side-padding);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.project-list-view-container[data-empty-view=false] {
+  padding-bottom: 5.25em;
+}
+
+.section-list {
+  max-width: var(--main-container-max-width);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-self: center;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+.project-list-view {
+  margin-top: 5px;
+  margin-bottom: 0 !important;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.project-tasks {
+  position: relative;
+  min-height: fit-content;
+  height: 86px;
+}
+
+.list-holder {
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.project-items-container {
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+
+.project-item {
+  overflow-anchor: none;
+  touch-action: manipulation;
+  border-bottom: 1px solid var(--main-container-divider);
+  list-style: none;
+}
+
+.proj-item-container {
+  border-radius: 5px;
+  width: 100%;
+  margin-left: -8px;
+  cursor: pointer;
+  display: flex;
+  align-items: stretch;
+  padding: 0 8px;
+  position: relative;
+}
+
+.proj-item-container-flex {
+  display: flex;
+  flex-grow: 1;
+  vertical-align: baseline;
+}
+
+.task-blank-space {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 27px;
+  padding-right: 3px;
+  position: absolute;
+  top: 7px;
+  left: -16px;
+}
+
+/*button*/
+.task-checkbox {
+  --bounding-box-size: 24px;
+  z-index: 1;
+  margin: 8px 6px 0 -3px;
+  width: var(--bounding-box-size);
+  height: var(--bounding-box-size);
+  cursor: pointer;
+  display: grid;
+  grid-template-areas: "center" var(--bounding-box-size);
+  align-items: center;
+  justify-items: center;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.buttonish-elem-2 {
+  color: #202020;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: 13px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.button-background {
+  border-width: 1px;
+  z-index: 1;
+  background-color: transparent;
+  opacity: 0.1;
+  grid-area: center;
+  overflow: hidden; 
+  height: var(--main-circle-diameter);
+  width: var(--main-circle-diameter);
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+
+.tb7nk6f {
+  z-index: 3;
+  color: var(--check);
+  transition: opacity var(--animation-shortest)var(--ease-in);
+  pointer-events: none;
+  opacity: 0;
+  grid-area: center;
+}
+
+.task-checkbox:hover .tb7nk6f {
+  opacity: 1;
+}
+
+.button-border {
+  border-width: 1px;
+  border-style: solid;
+  z-index: 2;
+  border-color: var(--tint);
+  grid-area: center;
+  height: var(--main-circle-diameter);
+  width: var(--main-circle-diameter);
+  /* border: 2px solid transparent; */
+  border-radius: 50%;
 }
