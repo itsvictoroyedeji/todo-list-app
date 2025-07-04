@@ -126,6 +126,8 @@ body {
   --tint: #999;
   --animation-shortest: .15s;
   --ease-in: cubic-bezier(.4,0,1,1);
+  --task-list-item-padding-y: 8px;
+  --task-action-buttons-right-shift: 30px;
 }
 
 #todolist_app {
@@ -630,6 +632,9 @@ a {
   touch-action: manipulation;
   border-bottom: 1px solid var(--main-container-divider);
   list-style: none;
+  display: flex;
+  position: relative;
+  
 }
 
 .proj-item-container {
@@ -663,7 +668,7 @@ a {
 .task-checkbox {
   --bounding-box-size: 24px;
   z-index: 1;
-  margin: 8px 6px 0 -3px;
+  margin: 8px 6px 0 -3px !important;
   width: var(--bounding-box-size);
   height: var(--bounding-box-size);
   cursor: pointer;
@@ -724,4 +729,45 @@ a {
   width: var(--main-circle-diameter);
   /* border: 2px solid transparent; */
   border-radius: 50%;
+}
+
+.task-item-content {
+  padding: var(--task-list-item-padding-y) 0;
+  margin-right: var(--task-action-buttons-right-shift);
+  flex: 1;
+}
+
+.task-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3px;
+}
+
+.task-content {
+  display: flex;
+  font-size: var(--font-size-body);
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.65;
+  vertical-align: baseline;
+  overflow-wrap: break-word;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  padding: 1px 1px 1px 0;
+  display: -webkit-box;
+  overflow: hidden;
+}
+
+.task-description {
+  word-wrap: break-word;
+  word-break: break-all;
+  line-height: 1.65;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin-bottom: 2px;
+  font-size: 12px;
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--text-secondary-color);
+  text-decoration-color: var(--text-secondary-color);
 }
