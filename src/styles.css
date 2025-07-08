@@ -112,7 +112,7 @@ body {
   --link-color: #202020;
   --font-weight-medium: 600;
   --menu-button-width: 24px;
-  --sidebar-item-hover: #f2efed;
+  --sidebar-item-hover: #efedf2;
   --main-item-hover: #f2efed;
   --sidebar-toggle-transition-duration: 0.3s;
   --sidebar-toggle-transition-function: cubic-bezier(.4,0,.2,1);
