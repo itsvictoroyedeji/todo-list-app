@@ -602,7 +602,7 @@ a {
 .project-list-view {
   margin-top: 5px;
   margin-bottom: 0 !important;
-  margin: 0;
+  /* margin: 0; */
   padding: 0;
   list-style-type: none;
 }
@@ -610,14 +610,14 @@ a {
 .project-tasks {
   position: relative;
   min-height: fit-content;
-  height: 86px;
+  /* height: 86px; */
 }
 
 .list-holder {
   top: 0px;
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: relative;
 }
 
 .project-items-container {
@@ -860,4 +860,57 @@ a {
 .task-list-actions-container > button:hover {
   color: var(--main-button-hover-text);
   background-color: var(--main-button-hover-background);
+}
+
+.add-task-section {
+  padding: 0 20px 0 1px;
+}
+
+.actions {
+  color: #555;
+}
+
+.add-task-button {
+  border-radius: 5px;
+  width: 100%;
+  margin-left: -8px;
+  text-align: left;
+  color: gray;
+  white-space: nowrap;
+  padding: 0 8px 8px 9px;
+  font-size: 0.9rem;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.add-task-section button {
+  transition: opacity .2s ease-in-out;
+}
+
+.add-task-button .icon_add {
+  color: var(--lighter-red);
+  vertical-align: 7px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 17px;
+  height: 17px;
+  margin-right: 7px;
+  transform: translateY(8px);
+}
+
+.add-task-button:hover {
+  color: var(--lighter-red);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.add-task-button:hover .icon_add {
+  color: #fff;
+  background-color: var(--lighter-red);
+}
+
+.add-task-button:hover .icon_add svg {
+  transform: scale(.846); /* makes svg icon smaller */
 }
