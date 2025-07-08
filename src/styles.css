@@ -86,7 +86,7 @@ body {
 
 :root {
   --main-background-base-primary: #fff;
-  --main-background-base-secondary: #fcfaf8;
+  --main-background-base-secondary: #eef7ff;
   --font-size-body: 0.95em;
   --content-primary: #202020;
   --text-secondary-color: #667;
@@ -106,8 +106,8 @@ body {
   --button-font-size: 0.9rem;
   --button-height: 2em;
   --button-width: 2em;
-  --darker-red: #a81f00;
-  --lighter-red: #dc4c3e;
+  --darker-red: #a80046;
+  --lighter-red: #dd0760;
   --lr-padding: 5px;
   --link-color: #202020;
   --font-weight-medium: 600;
