@@ -771,3 +771,93 @@ a {
   color: var(--text-secondary-color);
   text-decoration-color: var(--text-secondary-color);
 }
+
+.task-date-container {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 16px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  height: 16px;
+  line-height: 16px;
+  color: var(--text-secondary-color);
+}
+
+.task-date-container .date-icon {
+  font-size: 12px;
+  text-overflow: ellipsis;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--main-spacing-small) / 2);
+  margin: 0;
+  line-height: 12px;
+  overflow: hidden;
+}
+
+.task-date-container .date-icon {
+  color: purple;
+}
+
+.date-icon svg {
+  flex-shrink: 0;
+  margin: 0;
+  transform: none;
+  vertical-align: middle;
+}
+
+.date-icon .date {
+  line-height: 1.5;
+  color: inherit;
+  font-size: inherit;
+  padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.task-list-actions-container {
+  height: 24px;
+  margin-right: calc(-1 * var(--task-action-buttons-right-shift));
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+  padding-left: 1em;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.project-item .task-list-actions-container button {
+  opacity: 0;
+}
+
+.project-item:hover .task-list-actions-container {
+  background-image: linear-gradient(to right, transparent 0,#fff 16px 100%);
+}
+
+.project-item:hover .task-list-actions-container button {
+  opacity: 1;
+}
+
+.task-list-actions-container>button, .task-list-actions-container a {
+  color: var(--text-secondary-color);
+  font-size: calc(var(--button-font-size) - 2px);
+  cursor: pointer;
+  height: 24px;
+  margin-left: var(--main-spacing-xsmall);
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-duration: .1s; /* Faster transition */
+} 
+
+.task-list-delete-button {
+  color: var(--lighter-red) !important;
+}
+
+.task-list-actions-container > button:hover {
+  color: var(--main-button-hover-text);
+  background-color: var(--main-button-hover-background);
+}
