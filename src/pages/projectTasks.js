@@ -1,9 +1,17 @@
-import addTaskDialog from "../modals/addTask"
+import addTaskModal from "../modals/addTask"
 
 // Shows Project Task page
 export default function ProjectTasks() {
   // <main id="content" tabindex="-1"> - The root element that doesn't change
   const mainContent = document.querySelector("#content");
+
+  // global variable declaration
+  const svgNS = "http://www.w3.org/2000/svg";
+  const editTaskText = "Edit";
+  const deleteTaskText = "Delete";
+  const editProjectText = "Edit Project";
+  const deleteProjectText = "Delete Project";
+  const addTaskText = "Add Task";
 
   //   <div class="my-project-view-container">
   const myProjectsContainer = document.createElement("div");
@@ -68,8 +76,7 @@ export default function ProjectTasks() {
 
   //                 <span>Edit Project</span>
   const editProjectSpan = document.createElement("span");
-  const editProjectSpanText = "Edit Project";
-  editProjectSpan.appendChild(document.createTextNode(editProjectSpanText));
+  editProjectSpan.appendChild(document.createTextNode(editProjectText));
   editProjectButton.appendChild(editProjectSpan);
   
   //               </button>
@@ -81,8 +88,7 @@ export default function ProjectTasks() {
 
   //                 <span>Delete Project</span>
   const deleteProjectSpan = document.createElement("span");
-  const deleteProjectSpanText = "Delete Project";
-  deleteProjectSpan.appendChild(document.createTextNode(deleteProjectSpanText));
+  deleteProjectSpan.appendChild(document.createTextNode(deleteProjectText));
   deleteProjectButton.appendChild(deleteProjectSpan);
   //               </button>
   //             </div>
@@ -100,7 +106,7 @@ export default function ProjectTasks() {
 
   //               <h1 class="large-header-text">Default Project</h1>
   const headerContainerText = document.createElement("h1");
-  headerContainerText.classList.add("large-header-container-2");
+  headerContainerText.classList.add("large-header-text");
   const project = [
     {
       name: "Default Project"
@@ -198,18 +204,17 @@ export default function ProjectTasks() {
     taskCheckboxButton.appendChild(buttonBackground);
 
   //                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="tb7nk6f">
-    const buttonBackgroundSVG = document.createElement("svg");
+    const buttonBackgroundSVG = document.createElementNS(svgNS, "svg");
     buttonBackgroundSVG.setAttribute("width", "24");
     buttonBackgroundSVG.setAttribute("height", "24");
     buttonBackgroundSVG.setAttribute("viewBox", "0 0 24 24");
     buttonBackgroundSVG.setAttribute("fill", "none");
-    buttonBackgroundSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     buttonBackgroundSVG.classList.add("tb7nk6f");
     taskCheckboxButton.appendChild(buttonBackgroundSVG);
 
   //                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5056 9.00958C16.2128 8.71668 15.7379 8.71668 15.445 9.00958L10.6715 13.7831L8.72649 11.8381C8.43359 11.5452 7.95872 11.5452 7.66583 11.8381C7.37294 12.1309 7.37293 12.6058 7.66583 12.8987L10.1407 15.3736C10.297 15.5299 10.5051 15.6028 10.7097 15.5923C10.8889 15.5833 11.0655 15.5104 11.2023 15.3735L16.5056 10.0702C16.7985 9.77735 16.7985 9.30247 16.5056 9.00958Z" fill="currentColor">
   //                                 </path>
-    const buttonBackgroundSVGPath = document.createElement("path");
+    const buttonBackgroundSVGPath = document.createElementNS(svgNS, "path");
     buttonBackgroundSVGPath.setAttribute("fill-rule", "evenodd");
     buttonBackgroundSVGPath.setAttribute("clip-rule", "evenodd");
     const buttonBackgroundSVGPathTrace = "M16.5056 9.00958C16.2128 8.71668 15.7379 8.71668 15.445 9.00958L10.6715 13.7831L8.72649 11.8381C8.43359 11.5452 7.95872 11.5452 7.66583 11.8381C7.37294 12.1309 7.37293 12.6058 7.66583 12.8987L10.1407 15.3736C10.297 15.5299 10.5051 15.6028 10.7097 15.5923C10.8889 15.5833 11.0655 15.5104 11.2023 15.3735L16.5056 10.0702C16.7985 9.77735 16.7985 9.30247 16.5056 9.00958Z";
@@ -256,11 +261,40 @@ export default function ProjectTasks() {
   //                                 </div>
   //                               </div>
   //                               <div class="task-date-container buttonish-elem-2">
+    const taskDateContainer = document.createElement("div");
+    taskDateContainer.classList.add("task-date-container", "buttonish-elem-2");
+    taskItemContent.appendChild(taskDateContainer);
   
   //                                 <span class="date-icon">
-  //                                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12"><path fill="currentColor" fill-rule="evenodd" d="M9.5 1h-7A1.5 1.5 0 0 0 1 2.5v7A1.5 1.5 0 0 0 2.5 11h7A1.5 1.5 0 0 0 11 9.5v-7A1.5 1.5 0 0 0 9.5 1M2 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zM8.75 8a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0M3.5 4a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z" clip-rule="evenodd"></path>
-  //                                   <path fill="currentColor" fill-rule="evenodd" d="M9.5 1h-7A1.5 1.5 0 0 0 1 2.5v7A1.5 1.5 0 0 0 2.5 11h7A1.5 1.5 0 0 0 11 9.5v-7A1.5 1.5 0 0 0 9.5 1M2 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zM8.75 8a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0M3.5 4a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z" clip-rule="evenodd"></path></svg>
+    const dateIcon = document.createElement("span");
+    dateIcon.classList.add("date-icon");
+    taskDateContainer.appendChild(dateIcon);
+
+  //                                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12">
+    const dateIconSVG = document.createElementNS(svgNS, "svg");
+    dateIconSVG.setAttribute("width", "12");
+    dateIconSVG.setAttribute("height", "12");
+    dateIconSVG.setAttribute("viewBox", "0 0 12 12");
+    dateIconSVG.setAttribute("fill", "none");
+    dateIcon.appendChild(dateIconSVG);
+
+  //                                    <path fill="currentColor" fill-rule="evenodd" d="M9.5 1h-7A1.5 1.5 0 0 0 1 2.5v7A1.5 1.5 0 0 0 2.5 11h7A1.5 1.5 0 0 0 11 9.5v-7A1.5 1.5 0 0 0 9.5 1M2 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zM8.75 8a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0M3.5 4a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z" clip-rule="evenodd"></path>
+    const dateIconSVGPath = document.createElementNS(svgNS, "path");
+    dateIconSVGPath.setAttribute("fill-rule", "evenodd");
+    dateIconSVGPath.setAttribute("clip-rule", "evenodd");
+    const dateIconSVGPathTrace = "M9.5 1h-7A1.5 1.5 0 0 0 1 2.5v7A1.5 1.5 0 0 0 2.5 11h7A1.5 1.5 0 0 0 11 9.5v-7A1.5 1.5 0 0 0 9.5 1M2 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zM8.75 8a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0M3.5 4a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z";
+    dateIconSVGPath.setAttribute("d", dateIconSVGPathTrace);
+    dateIconSVGPath.setAttribute("fill", "currentColor");
+    dateIconSVG.appendChild(dateIconSVGPath);
+
+  //                                  </svg>
   //                                   <span class="date">
+    const dateSpan = document.createElement("span");
+    dateSpan.classList.add("date");
+    // const currentDate = new Date();
+    // const dateString = currentDate.toLocaleDateString();
+    dateSpan.appendChild(document.createTextNode(taskItems[i].date));
+    dateIcon.appendChild(dateSpan);
   //                                     Today
   //                                   </span>
   //                                 </span>
@@ -269,8 +303,23 @@ export default function ProjectTasks() {
   //                           </div>
   //                         </div>
   //                         <div class="task-list-actions-container">
+    const taskListActionsContainer = document.createElement("div");
+    taskListActionsContainer.classList.add("task-list-actions-container");
+    projectItemContainerFlex.appendChild(taskListActionsContainer);
+
   //                           <button class="task-list-edit-button buttonish-elem" type="button">Edit</button>
+    const taskListEditButton = document.createElement("button");
+    taskListEditButton.classList.add("task-list-edit-button", "buttonish-elem");
+    taskListEditButton.appendChild(document.createTextNode(editTaskText));
+    taskListEditButton.setAttribute("type", "button");
+    taskListActionsContainer.appendChild(taskListEditButton);
   //                           <button class="task-list-delete-button buttonish-elem" type="button">Delete</button>
+    const taskListDeleteButton = document.createElement("button");
+    taskListDeleteButton.classList.add("task-list-delete-button", "buttonish-elem");
+    taskListDeleteButton.appendChild(document.createTextNode(deleteTaskText));
+    taskListDeleteButton.setAttribute("type", "button");
+    taskListActionsContainer.appendChild(taskListDeleteButton);
+
   //                         </div>
   //                       </li>
   }
@@ -279,11 +328,40 @@ export default function ProjectTasks() {
   //                   </div>
   //                 </li>
   //                 <div style="height: 1px;"></div>
+  const aboveAddTaskButtonDiv = document.createElement("div");
+  aboveAddTaskButtonDiv.setAttribute("style", "height: 1px;");
+  projectListView.appendChild(aboveAddTaskButtonDiv);
+
   //                 <li class="add-task-section actions">
+  const addTaskSection = document.createElement("li");
+  addTaskSection.classList.add("add-task-section", "actions");
+  aboveAddTaskButtonDiv.appendChild(addTaskSection);
+
   //                   <button class="add-task-button buttonish-elem-2" type="button">
+  const addTaskButton = document.createElement("button");
+  addTaskButton.classList.add("add-task-button", "buttonish-elem-2");
+  addTaskButton.setAttribute("type", "button");
+
   //                     <span class="icon_add">
+  const addIcon = document.createElement("span");
+  addIcon.classList.add("icon_add");
+  addTaskButton.appendChild(addIcon);
+
   //                       <svg width="13" height="13"><path fill="currentColor" fill-rule="evenodd" d="M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1z"></path></svg>
+  const addIconSVG = document.createElementNS(svgNS, "svg");
+  addIconSVG.setAttribute("width", "13");
+  addIconSVG.setAttribute("height", "13");
+  addIcon.appendChild(addIconSVG);
+
+  const addIconSVGPath = document.createElementNS(svgNS, "path");
+  addIconSVGPath.setAttribute("fill", "currentColor");
+  addIconSVGPath.setAttribute("fill-rule", "evenodd");
+  addIconSVGPath.setAttribute("d", "M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1z");
+  addIconSVG.appendChild(addIconSVGPath);
+
   //                     </span>
+  addTaskButton.appendChild(document.createTextNode(addTaskText));
+  addTaskSection.appendChild(addTaskButton);
   //                     Add task
   //                   </button>
   //                 </li>
@@ -296,6 +374,6 @@ export default function ProjectTasks() {
   //   </div>
   // </main>
   // Generate Modal to add task
-  addTaskDialog();
+  addTaskModal();
    
 }
