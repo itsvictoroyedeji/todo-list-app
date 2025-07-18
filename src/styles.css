@@ -920,3 +920,19 @@ a {
   transform: scale(.846); /* makes svg icon smaller */
 }
 
+/* Add Task modal */
+#addTaskDialog {
+  width: clamp(300px, 80%, 600px);
+  margin: 1em auto;
+  min-width: max-content;
+  padding: 2.5em;
+  border: 2px solid grey;
+  border-radius: 3px;
+}
+
+#addTaskDialog div {
+  margin-bottom: 1.1em;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.1rem;
+}

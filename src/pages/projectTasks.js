@@ -372,8 +372,5 @@ export default function ProjectTasks() {
   //       </div>
   //     </div>  
   //   </div>
-  // </main>
-  // Generate Modal to add task
-  addTaskModal();
-   
+  // </main>  
 }
