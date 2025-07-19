@@ -70,7 +70,7 @@
     </div>
     <dialog id="addTaskDialog">
       <div class="form-section">
-        <form id="addNewTask">
+        <form id="addNewTask" class="form" method="dialog">
           <header class="form-header">
             <div class="form-header-flex">
               <div class="form-header-title-container">
@@ -78,8 +78,8 @@
                   Add new task
                 </h1>
               </div>
-              <div class="form-close-button">
-                <button class="form-close-button" type="button">
+              <div class="form-close-container">
+                <button class="form-close-button buttonish-elem" type="button" tabindex="0">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="currentColor" d="M5.146 5.146a.5.5 0 0 1 .708 0L12 11.293l6.146-6.147a.5.5 0 0 1 .638-.057l.07.057a.5.5 0 0 1 0 .708L12.707 12l6.147 6.146a.5.5 0 0 1 .057.638l-.057.07a.5.5 0 0 1-.708 0L12 12.707l-6.146 6.147a.5.5 0 0 1-.638.057l-.07-.057a.5.5 0 0 1 0-.708L11.293 12 5.146 5.854a.5.5 0 0 1-.057-.638z"></path></svg>
                 </button>
               </div>
@@ -94,7 +94,7 @@
                 </label>
                 <input type="text" name="name" id="task-name"
                 placeholder="Submit items by next week"
-                max-length="120"
+                maxlength="120"
                 autofocus
                 required>
               </div>
@@ -124,35 +124,17 @@
                 name="task-priority" id="task-priority"
                 autofocus>
                   <option value="">Select a priority</option>
-                  <option value="priority 1" class="priority-1">
-                    <div class="priority-color-container">
-                      <div class="priority-color"></div>
-                    </div>
-                    <div class="priority">
-                      Priority 1
-                    </div>
+                  <option value="priority 1">
+                    Priority 1
                   </option>
-                  <option value="priority 2" class="priority-2">
-                    <div class="priority-color-container">
-                      <div class="priority-color"></div>
-                    </div>
-                    <div class="priority">
-                      Priority 2
-                    </div>
-                  </option><option value="priority 3" class="priority-3">
-                    <div class="priority-color-container">
-                      <div class="priority-color"></div>
-                    </div>
-                    <div class="priority">
-                      Priority 3
-                    </div>
-                  </option><option value="priority 4" class="priority-4">
-                    <div class="priority-color-container">
-                      <div class="priority-color"></div>
-                    </div>
-                    <div class="priority">
-                      Priority 4
-                    </div>
+                  <option value="priority 2">
+                    Priority 2
+                  </option>
+                  <option value="priority 3">
+                    Priority 3
+                  </option>
+                  <option value="priority 4">
+                    Priority 4
                   </option>
                 </select>
               </div>
@@ -166,25 +148,19 @@
                   <option value="(current project)">(current project)</option>
                 </select>
               </div>
-              <div class="form-row task-form-notes">
-                <label for="task-notes">
-                  Notes
-                </label>
-                <input type="text" name="task-notes" id="task-notes"
-                max-length="240"
-                autofocus>
-              </div>
             </div>
           </div>
           <div class="form-buttons-container">
             <hr class="form-buttons-line">
             <footer class="form-buttons-flex">
-              <button type="button" class="button cancel-button" value="cancel" formmethod="dialog" formnovalidate>
-                Cancel
-              </button>
-              <button type="submit" class="button submit-button">
-                Add
-              </button>
+              <div class="form-buttons-flex-2">
+                <button type="button" class="button cancel-button buttonish-elem" value="cancel" formmethod="dialog" formnovalidate>
+                  Cancel
+                </button>
+                <button type="submit" class="button submit-button buttonish-elem">
+                  Add
+                </button>
+              </div>
             </footer>
           </div>
         </form>

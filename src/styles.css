@@ -88,6 +88,7 @@ body {
   --main-background-base-primary: #fff;
   --main-background-base-secondary: #eef7ff;
   --font-size-body: 0.95em;
+  --font-size-subtitle: 1em;
   --content-primary: #202020;
   --text-secondary-color: #667;
   --sidebar-spacing-xsmall: 0.3em;
@@ -100,6 +101,7 @@ body {
   --main-spacing-medium: 0.9em;
   --main-spacing-large: 1em;
   --main-spacing-xlarge: 1.2em;
+  --main-spacing-xxlarge: 2em;
   --main-border-radius-small: 5px;
   --main-view-header-height: calc(56px + 0px);
   --transparent-color: transparent;
@@ -129,6 +131,7 @@ body {
   --ease-in: cubic-bezier(.4,0,1,1);
   --task-list-item-padding-y: 8px;
   --task-action-buttons-right-shift: 30px;
+  --modal-padding-top: 13vh;
 }
 
 #todolist_app {
@@ -921,18 +924,225 @@ a {
 }
 
 /* Add Task modal */
-#addTaskDialog {
-  width: clamp(300px, 80%, 600px);
-  margin: 1em auto;
-  min-width: max-content;
-  padding: 2.5em;
-  border: 2px solid grey;
-  border-radius: 3px;
+#addTaskDialog[open] {
+  position: fixed;
+  inset: 0 0 0 0;
+  margin: auto;
 }
 
-#addTaskDialog div {
-  margin-bottom: 1.1em;
-  font-weight: bold;
+#addTaskDialog {
+  width: clamp(300px, 80%, 475px);
+  /* width: 50%; */
+  /* margin: 5em auto; */
+  min-width: max-content;
+  padding: 0;
+  border: none;
+  border-radius: 10px; 
+  /* isolation: isolate; */
+  animation: .3s cubic-bezier(.4,0,.2,1) modal-dialog;
+  max-width: 100%;
+  transition: width .2s ease-in-out, box-shadow .5s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .16);
+  overflow: hidden;
+  outline: none !important;
+}
+
+@keyframes modal-dialog {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#addTaskDialog::backdrop {
+  background-color: rgba(0, 0, 0, .4);
+}
+
+.form-section {
+  max-height: calc(100vh - 1 * var(--modal-padding-top));
+  width: 100%;
+  height: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.form .form-header {
+  padding: var(--main-spacing-small);
+  padding-left: var(--main-spacing-large);
+}
+
+.form .form-header-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--main-spacing-large)
+}
+
+.form .form-header-title-container {
+  flex-grow: 1;
+  min-width: 0;
+  flex-basis: auto;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+h1.form-header-text {
+  font-size: calc(var(--font-size-subtitle) + 1px);
+  font-weight: var(--font-weight-medium);
+  color: var(--content-primary);
+}
+
+.form .form-close-container {
+  flex-basis: content;
+  min-width: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.form .form-close-button {
+  transition-property: box-shadow, border;
+  transition-duration: .3s;
+  transition-timing-function: ease;
+  width: var(--button-height);
+  height: var(--button-height);
+  padding: 0;
+  color: var(--text-secondary-color);
+  background-color: transparent;
+  outline: none !important;
+}
+
+.form .form-close-button:hover {
+  background-color:rgba(0, 0, 0, .04);
+}
+
+.form .form-close-button svg {
+  pointer-events: none;
+}
+
+.form-header-line {
+  border: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.form .main-form {
+  overflow: auto;
+  flex-grow: 0;
+}
+
+.form .main-form-container-flex {
+  padding: var(--main-spacing-large);
+  padding-bottom: calc(var(--main-spacing-xlarge) + 5px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  gap: calc(var(--main-spacing-large) + 1px);
+}
+
+.form .main-form-container-flex * {
+  outline: none !important;
+}
+
+.form .form-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--main-spacing-xsmall);
+  flex-grow: 1;
+}
+
+.form .form-row label {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 2px;
+  line-height: 21px;
+  letter-spacing: -.10px;
+  font-weight: 700;
+}
+
+.form .form-row input,
+.form .form-row select {
+  --main-input-wrapper-height: 32px;
+  border-radius: 5px;
+  border: 1px solid #e6e6e6;
+  overflow: clip;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  transition-property: box-shadow, border;
+  transition-duration: .3s;
+  transition-timing-function: ease;
+  padding: calc((30px - 14px - 2px) / 2) 8px;
+  text-overflow: ellipsis;
+  background: 0 0;
+  font-size: var(--font-size-body);
+  line-height: calc(var(--font-size-body) + 7px);
+
+}
+
+.form .form-row select {
+  padding: 0 4px;
+}
+
+.form-buttons-line {
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+
+.form .form-buttons-flex {
+  padding: var(--main-spacing-large);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--main-spacing-large);
+}
+
+.form .form-buttons-flex-2 {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.form footer .button {
+  min-width: 68px;
+  color: #444;
+  background-color: rgba(0, 0, 0, .04);
   text-align: center;
-  font-size: 1.1rem;
+  padding: 0 12px;
+  font-size: 13px;
+  height: 32px;
+  width: auto;
+  border-radius: 5px;
+}
+
+.form footer .button:hover {
+  background-color: rgba(0, 0, 0, .07);
+}
+
+.form footer .submit-button {
+  color: #fff;
+  background-color: var(--lighter-red);
+}
+
+.form footer .submit-button:hover {
+  background-color: var(--darker-red);
 }

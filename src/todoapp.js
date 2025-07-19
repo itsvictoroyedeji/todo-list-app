@@ -10,6 +10,7 @@ const addTaskButton = document.querySelector('.add-task-button');
 const mainDialog = document.querySelector('#addTaskDialog');
 const submitButton = document.querySelector('.submit-button');
 const cancelButton = document.querySelector('.cancel-button');
+const formCloseButton = document.querySelector('.form-close-button')
 
 addTaskButton.addEventListener("click", () => {
   mainDialog.showModal();
@@ -18,10 +19,19 @@ addTaskButton.addEventListener("click", () => {
 cancelButton.addEventListener("click", (e) => {
   e.preventDefault();
   mainDialog.close();
-})
+});
+
+formCloseButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  mainDialog.close();
+});
 
 submitButton.addEventListener("click", taskSubmit);
 function taskSubmit(e) {
   e.preventDefault();
   console.log(e);
 }
+
+mainDialog.addEventListener("mouseover", (e) => {
+  e.preventDefault();
+})
