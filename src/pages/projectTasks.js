@@ -1,5 +1,3 @@
-import addTaskModal from "../modals/addTask"
-
 // Shows Project Task page
 export default function ProjectTasks() {
   // <main id="content" tabindex="-1"> - The root element that doesn't change

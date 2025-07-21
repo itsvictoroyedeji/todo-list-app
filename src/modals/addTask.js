@@ -1,26 +1,104 @@
 export default function addTaskModal() {
+
+  // Get Root dialog element
+  const mainDialog = document.querySelector("#addTaskDialog");
+
+  // global variable declaration
+  const svgNS = "http://www.w3.org/2000/svg";
+  const formTitle = "Add new task";
+  const cancelButtonText = "Cancel";
+  const addButtonText = "Add";
+
   // Add task dialog
   // <div class="form-section">
+  const formSection = document.createElement("div");
+  formSection.classList.add("form-section");
+  mainDialog.appendChild(formSection);
+    
   //   <form id="addNewTask" class="form" method="dialog">
+  const form = document.createElement("form");
+  form.classList.add("form");
+  form.id = "addNewTask";
+  formSection.appendChild(form);
+
   //     <header class="form-header">
+  const formHeader = document.createElement("header");
+  formHeader.classList.add("form-header");
+  form.appendChild(formHeader);
+
   //       <div class="form-header-flex">
+  const formHeaderFlex = document.createElement("div");
+  formHeaderFlex.classList.add("form-header-flex");
+  formHeader.appendChild(formHeaderFlex);
+
   //         <div class="form-header-title-container">
+  const formHeaderTitle = document.createElement("div");
+  formHeaderTitle.classList.add("form-header-title-container");
+  formHeaderFlex.appendChild(formHeaderTitle);
+
   //           <h1 class="form-header-text">
+  const formHeaderText = document.createElement("h1");
+  formHeaderText.classList.add("form-header-text");
+  formHeaderText.appendChild(document.createTextNode(formTitle));
+  formHeaderTitle.appendChild(formHeaderText);
+
   //             Add new task
   //           </h1>
   //         </div>
   //         <div class="form-close-container">
+  const formCloseContainer = document.createElement("div");
+  formCloseContainer.classList.add("form-close-container");
+  formHeaderFlex.appendChild(formCloseContainer);
+
   //           <button class="form-close-button buttonish-elem" type="button" tabindex="0">
-  //             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="currentColor" d="M5.146 5.146a.5.5 0 0 1 .708 0L12 11.293l6.146-6.147a.5.5 0 0 1 .638-.057l.07.057a.5.5 0 0 1 0 .708L12.707 12l6.147 6.146a.5.5 0 0 1 .057.638l-.057.07a.5.5 0 0 1-.708 0L12 12.707l-6.146 6.147a.5.5 0 0 1-.638.057l-.07-.057a.5.5 0 0 1 0-.708L11.293 12 5.146 5.854a.5.5 0 0 1-.057-.638z"></path></svg>
+  const formCloseButton = document.createElement("button");
+  formCloseButton.classList.add("form-close-button buttonish-elem");
+  formCloseButton.setAttribute("type", "button");
+  formCloseButton.setAttribute("tabindex", "0");
+  formCloseContainer.appendChild(formCloseButton);
+
+  //             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+  const formCloseButtonSVG = document.createElementNS(svgNS, "svg");
+  formCloseButtonSVG.setAttribute("width", "24");
+  formCloseButtonSVG.setAttribute("height", "24");
+  formCloseButton.appendChild(formCloseButtonSVG);
+
+                  // <path fill="currentColor" d="M5.146 5.146a.5.5 0 0 1 .708 0L12 11.293l6.146-6.147a.5.5 0 0 1 .638-.057l.07.057a.5.5 0 0 1 0 .708L12.707 12l6.147 6.146a.5.5 0 0 1 .057.638l-.057.07a.5.5 0 0 1-.708 0L12 12.707l-6.146 6.147a.5.5 0 0 1-.638.057l-.07-.057a.5.5 0 0 1 0-.708L11.293 12 5.146 5.854a.5.5 0 0 1-.057-.638z"></path></svg>
+  const formCloseButtonSVGPath = document.createElementNS(svgNS, "path");
+  formCloseButtonSVGPath.setAttribute("fill", "currentColor");
+  formCloseButtonSVGPath.setAttribute("d", "M5.146 5.146a.5.5 0 0 1 .708 0L12 11.293l6.146-6.147a.5.5 0 0 1 .638-.057l.07.057a.5.5 0 0 1 0 .708L12.707 12l6.147 6.146a.5.5 0 0 1 .057.638l-.057.07a.5.5 0 0 1-.708 0L12 12.707l-6.146 6.147a.5.5 0 0 1-.638.057l-.07-.057a.5.5 0 0 1 0-.708L11.293 12 5.146 5.854a.5.5 0 0 1-.057-.638z");
+  formCloseButtonSVG.appendChild(formCloseButtonSVGPath);
+
   //           </button>
   //         </div>
   //       </div>
   //     </header>
   //     <hr class="form-header-line">
+  const formHeaderLine = document.createElement("hr");
+  formHeaderLine.classList.add("form-header-line");
+  form.appendChild(formHeaderLine);
+
   //     <div class="main-form">
+  const mainForm = document.createElement("div");
+  mainForm.classList.add("main-form");
+  form.appendChild(mainForm);
+
   //       <div class="main-form-container-flex">
+  const mainFormContainer = document.createElement("div");
+  mainFormContainer.classList.add("main-form-container-flex");
+  mainForm.appendChild(mainFormContainer);
+
   //         <div class="form-row task-form-name">
+  const taskName = document.createElement("div");
+  taskName.classList.add("form-row", "task-form-name");
+  mainFormContainer.appendChild(taskName);
+
   //           <label for="task-name">
+  const taskNameLabel = document.createElement("label");
+  taskNameLabel.setAttribute("for", "task-name");
+  taskNameLabel.appendChild(document.createTextNode("Name"));
+  taskName.appendChild(taskNameLabel);
+
   //             Name
   //           </label>
   //           <input type="text" name="name" id="task-name"
@@ -28,17 +106,51 @@ export default function addTaskModal() {
   //           maxlength="120"
   //           autofocus
   //           required>
+  const taskNameInput = document.createElement("input");
+  taskNameInput.type = "text";
+  taskNameInput.id = "task-name";
+  taskNameInput.name = "name";
+  taskNameInput.placeholder = "Submit items by next week";
+  taskNameInput.maxLength = 120;
+  taskNameInput.autofocus = true;
+  taskNameInput.required = true;
+  taskName.appendChild(taskNameInput);
+
   //         </div>
   //         <div class="form-row task-form-description">
+  const taskDescription = document.createElement("div");
+  taskDescription.classList.add("form-row", "task-form-description");
+  mainFormContainer.appendChild(taskDescription);
+
   //           <label for="task-description">
+  const taskDescriptionLabel = document.createElement("label");
+  taskDescriptionLabel.setAttribute("for", "task-description");
+  taskDescriptionLabel.appendChild(document.createTextNode("Description"));
+  taskDescription.appendChild(taskDescriptionLabel);
   //             Description
   //           </label>
   //           <input type="text" name="description" id="task-description"
   //           max-length="240"
   //           autofocus>
+  const taskDescriptionInput = document.createElement("input");
+  taskDescriptionInput.type = "text";
+  taskDescriptionInput.id = "task-description";
+  taskDescriptionInput.name = "description";
+  taskDescriptionInput.maxLength = 240;
+  taskDescriptionInput.autofocus = true;
+  taskDescription.appendChild(taskDescriptionInput);
+
   //         </div>
   //         <div class="form-row task-form-date">
+  const taskDate = document.createElement("div");
+  taskDate.classList.add("form-row", "task-form-date");
+  mainFormContainer.appendChild(taskDate);
+
   //           <label for="task-date">
+  const taskDateLabel = document.createElement("label");
+  taskDateLabel.setAttribute("for", "task-date");
+  taskDateLabel.appendChild(document.createTextNode("Date"));
+  taskDate.appendChild(taskDateLabel);
   //             Date
   //           </label>
   //           <input type="date" name="task-date" id="task-date"
@@ -46,14 +158,39 @@ export default function addTaskModal() {
   //           min="2023-01-01"
   //           max="2025-12-31"
   //           autofocus>
+  const taskDatePicker = document.createElement("input");
+  taskDatePicker.type = "date";
+  taskDatePicker.id = "task-date";
+  taskDatePicker.name = "date";
+  const todaysDate = new Date();
+  taskDatePicker.value = todaysDate.toLocaleDateString();
+  taskDatePicker.min = "2023/01/01";
+  taskDatePicker.max = "2026/12/31";
+  taskDatePicker.autofocus = true;
+  taskDate.appendChild(taskDatePicker);
+
   //         </div>
   //         <div class="form-row task-form-priority">
+  const taskPriority = document.createElement("div");
+  taskPriority.classList.add("form-row", "task-form-priority");
+  mainFormContainer.appendChild(taskPriority);
+
   //           <label for="task-priority">
+  const taskPriorityLabel = document.createElement("label");
+  taskPriorityLabel.setAttribute("for", "task-priority");
+  taskPriorityLabel.appendChild(document.createTextNode("Priority"));
+  taskPriority.appendChild(taskPriorityLabel);
+
   //             Priority
   //           </label>
   //           <select
   //           name="task-priority" id="task-priority"
   //           autofocus>
+  const taskPrioritySelect = document.createElement("select");
+  taskPrioritySelect.id = "task-priority";
+  taskPrioritySelect.name = "task-priority";
+  taskPrioritySelect.autofocus = true;
+
   //             <option value="">Select a priority</option>
   //             <option value="priority 1">
   //               Priority 1
@@ -67,6 +204,34 @@ export default function addTaskModal() {
   //             <option value="priority 4">
   //               Priority 4
   //             </option>
+
+  const priorities = [
+    "Select a priority",
+    "Priority 1",
+    "Priority 2",
+    "Priority 3",
+    "Priority 4"
+  ];
+
+  for (let priority of priorities) {
+    const priorityOption = document.createElement("option");
+    priorityOption.value = priority;
+    if (priorityOption.value == "Select a priority") {
+      priorityOption.value = "";
+    }
+    priorityOption.appendChild(document.createTextNode(priority));
+    taskPrioritySelect.appendChild(priorityOption);
+  }
+
+  if (taskPrioritySelect.value === "Priority 1") {
+    taskPrioritySelect.style.background = "red";
+  } else if (taskPrioritySelect.value === "Priority 2") {
+    taskPrioritySelect.style.background = "green";
+  } else if (taskPrioritySelect.value === "Priority 3") {
+    taskPrioritySelect.style.background = "grey";
+  };
+
+  taskPriority.appendChild(taskPrioritySelect);
   //           </select>
   //         </div>
   //         <div class="form-row task-form-project">
