@@ -52,7 +52,7 @@ export default function addTaskModal() {
 
   //           <button class="form-close-button buttonish-elem" type="button" tabindex="0">
   const formCloseButton = document.createElement("button");
-  formCloseButton.classList.add("form-close-button buttonish-elem");
+  formCloseButton.classList.add("form-close-button", "buttonish-elem");
   formCloseButton.setAttribute("type", "button");
   formCloseButton.setAttribute("tabindex", "0");
   formCloseContainer.appendChild(formCloseButton);
@@ -162,8 +162,8 @@ export default function addTaskModal() {
   taskDatePicker.type = "date";
   taskDatePicker.id = "task-date";
   taskDatePicker.name = "date";
-  const todaysDate = new Date();
-  taskDatePicker.value = todaysDate.toLocaleDateString();
+  // const todaysDate = new Date();
+  // taskDatePicker.value = todaysDate.toLocaleDateString();
   taskDatePicker.min = "2023/01/01";
   taskDatePicker.max = "2026/12/31";
   taskDatePicker.autofocus = true;
@@ -223,19 +223,35 @@ export default function addTaskModal() {
     taskPrioritySelect.appendChild(priorityOption);
   }
 
-  if (taskPrioritySelect.value === "Priority 1") {
-    taskPrioritySelect.style.background = "red";
-  } else if (taskPrioritySelect.value === "Priority 2") {
-    taskPrioritySelect.style.background = "green";
-  } else if (taskPrioritySelect.value === "Priority 3") {
-    taskPrioritySelect.style.background = "grey";
-  };
+  taskPrioritySelect.addEventListener("change", priorityChange);
+
+  function priorityChange(e) {
+    if (taskPrioritySelect.value === "Priority 1") {
+      taskPrioritySelect.style.borderColor = "red";
+    } else if (taskPrioritySelect.value === "Priority 2") {
+      taskPrioritySelect.style.borderColor = "green";
+    } else if (taskPrioritySelect.value === "Priority 3") {
+      taskPrioritySelect.style.borderColor = "grey";
+    } else if (taskPrioritySelect.value === "Priority 4") {
+      taskPrioritySelect.style.borderColor = "#e6e6e6";
+    }
+  }
 
   taskPriority.appendChild(taskPrioritySelect);
   //           </select>
   //         </div>
+
   //         <div class="form-row task-form-project">
+  const taskProject = document.createElement("div");
+  taskProject.classList.add("form-row", "task-form-project");
+  mainFormContainer.appendChild(taskProject);
+
   //           <label for="task-project">
+  const taskProjectLabel = document.createElement("label");
+  taskProjectLabel.setAttribute("for", "task-project");
+  taskProjectLabel.appendChild(document.createTextNode("Project"));
+  taskProject.appendChild(taskProjectLabel);
+
   //             Project
   //           </label>
   //           <select
@@ -243,17 +259,68 @@ export default function addTaskModal() {
   //           autofocus>
   //             <option value="(current project)">(current project)</option>
   //           </select>
+  const taskProjectSelect = document.createElement("select");
+  taskProjectSelect.id = "task-project";
+  taskProjectSelect.name = "task-project";
+  taskProjectSelect.autofocus = true;
+ 
+  const userProjects = [
+    {
+      name: "(current project)"
+    }
+  ];
+
+  for (let i = 0 ; i < userProjects.length ; i++) {
+    const projectOption = document.createElement("option");
+    projectOption.value = userProjects[i].name;
+    projectOption.appendChild(document.createTextNode(userProjects[i].name));
+    taskProjectSelect.appendChild(projectOption);
+  }
+
+  taskProject.appendChild(taskProjectSelect);
+
   //         </div>
   //       </div>
   //     </div>
   //     <div class="form-buttons-container">
+  const formButtonsContainer = document.createElement("div");
+  formButtonsContainer.classList.add("form-buttons-container");
+  mainForm.appendChild(formButtonsContainer);
+
   //       <hr class="form-buttons-line">
+  const formButtonsLine = document.createElement("hr");
+  formButtonsLine.classList.add("form-buttons-line");
+  formButtonsContainer.appendChild(formButtonsLine);
+
   //       <footer class="form-buttons-flex">
+  const footerFormButtons = document.createElement("footer");
+  footerFormButtons.classList.add("form-buttons-flex");
+  formButtonsLine.appendChild(footerFormButtons);
+
   //         <div class="form-buttons-flex-2">
+  const footerFormButtons2 = document.createElement("div");
+  footerFormButtons2.classList.add("form-buttons-flex-2");
+  footerFormButtons.appendChild(footerFormButtons2);
+
   //           <button type="button" class="button cancel-button buttonish-elem" value="cancel" formmethod="dialog" formnovalidate>
   //             Cancel
   //           </button>
+  const cancelButton = document.createElement("button");
+  cancelButton.classList.add("button", "cancel-button", "buttonish-elem");
+  cancelButton.setAttribute("type", "button");
+  cancelButton.value = "cancel";
+  cancelButton.formMethod = "dialog";
+  cancelButton.formNoValidate = true;
+  cancelButton.appendChild(document.createTextNode(cancelButtonText));
+  footerFormButtons2.appendChild(cancelButton);
+
   //           <button type="submit" class="button submit-button buttonish-elem">
+  const submitButton = document.createElement("button");
+  submitButton.classList.add("button", "submit-button", "buttonish-elem");
+  submitButton.setAttribute("type", "submit");
+  submitButton.appendChild(document.createTextNode(addButtonText));
+  footerFormButtons2.appendChild(submitButton);
+
   //             Add
   //           </button>
   //         </div>

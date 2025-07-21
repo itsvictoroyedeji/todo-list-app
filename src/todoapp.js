@@ -1,9 +1,11 @@
 import "./styles.css";
 import { greeting } from "./greetings"; // remove this line and src/greetings.js file
 import ProjectTasks from "./pages/projectTasks";
+import AddTaskModal from "./modals/addTask"
 
-// Display Default Project Task's HTML
+// Display Default Project Task + Add Task Modal's HTML
 ProjectTasks();
+AddTaskModal();
 
 // + Add Task button to popup dialog
 const addTaskButton = document.querySelector('.add-task-button');
@@ -35,3 +37,5 @@ function taskSubmit(e) {
 mainDialog.addEventListener("mouseover", (e) => {
   e.preventDefault();
 })
+
+
