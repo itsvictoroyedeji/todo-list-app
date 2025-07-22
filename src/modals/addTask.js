@@ -231,7 +231,7 @@ export default function addTaskModal() {
     } else if (taskPrioritySelect.value === "Priority 2") {
       taskPrioritySelect.style.borderColor = "green";
     } else if (taskPrioritySelect.value === "Priority 3") {
-      taskPrioritySelect.style.borderColor = "grey";
+      taskPrioritySelect.style.borderColor = "blue";
     } else if (taskPrioritySelect.value === "Priority 4") {
       taskPrioritySelect.style.borderColor = "#e6e6e6";
     }

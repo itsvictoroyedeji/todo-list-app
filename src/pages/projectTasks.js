@@ -1,5 +1,7 @@
 // Shows Project Task page
-export default function ProjectTasks() {
+export default function ProjectTasks(user) {
+  console.log(user);
+
   // <main id="content" tabindex="-1"> - The root element that doesn't change
   const mainContent = document.querySelector("#content");
 
@@ -105,12 +107,7 @@ export default function ProjectTasks() {
   //               <h1 class="large-header-text">Default Project</h1>
   const headerContainerText = document.createElement("h1");
   headerContainerText.classList.add("large-header-text");
-  const project = [
-    {
-      name: "Default Project"
-    }
-  ];
-  headerContainerText.appendChild(document.createTextNode(project[0].name));
+  headerContainerText.appendChild(document.createTextNode(user.projects[0].name)); // <-- Active Project Name
   headerContainer2.appendChild(headerContainerText);
   //             </div>
   //           </div>
@@ -145,29 +142,11 @@ export default function ProjectTasks() {
   const projectItemsContainer = document.createElement("ul");
   projectItemsContainer.classList.add("project-items-container");
 
-  const taskItems = [
-    {
-      title: "Task 1 title",
-      description: "Task 1 description. This should work!",
-      date: "2025-07-14",
-      priority: 4,
-    },
-    {
-      title: "Task 2 title",
-      description: "Task 2 description. This should work!",
-      date: "2025-07-15",
-      priority: 4,
-    },
-    {
-      title: "Task 3 title",
-      description: "Task 3 description. This should work!",
-      date: "2025-07-16",
-      priority: 4,
-    }
-  ];
+  // LOOP TASKS
+  const tasks = user.projects[0].todos;
 
   //                       <!-- Each project item -->
-  for (let i = 0 ; i < taskItems.length - 1 ; i++) {
+  for (let i = 0 ; i < tasks.length ; i++) {
   
   //                       <li class="project-item" data-index="0">
     const projectItem = document.createElement("li");
@@ -224,6 +203,17 @@ export default function ProjectTasks() {
   //                               <span class="button-border"></span>
     const buttonBorder = document.createElement("span");
     buttonBorder.classList.add("button-border");
+
+    //Change border color depending on priority
+    if (tasks[i].priority === "Priority 1") {
+      buttonBorder.style.borderColor = "red";
+    } else if (tasks[i].priority === "Priority 2") {
+      buttonBorder.style.borderColor = "green";
+    } else if (tasks[i].priority === "Priority 3") {
+      buttonBorder.style.borderColor = "blue";
+    } else if (tasks[i].priority === "Priority 4") {
+      buttonBorder.style.borderColor = "var(--tint)";
+    }
     taskCheckboxButton.appendChild(buttonBorder);
 
   //                             </button>
@@ -240,25 +230,29 @@ export default function ProjectTasks() {
   //                                 <div class="task-content">
     const taskContent = document.createElement("div");
     taskContent.classList.add("task-content");
-    taskContent.appendChild(document.createTextNode(taskItems[i].title));
+    taskContent.appendChild(document.createTextNode(tasks[i].title));
     taskItemWrapper.appendChild(taskContent);
 
   //                                   Do a review of something inside here
   //                                 </div>
   //                                 <div class="task-description">
-    const taskDescription = document.createElement("div");
-    taskDescription.classList.add("task-description");
-    taskItemWrapper.appendChild(taskDescription);
+    if (tasks[i].description !== undefined) {
+      const taskDescription = document.createElement("div");
+      taskDescription.classList.add("task-description");
+      taskItemWrapper.appendChild(taskDescription);
 
-  //                                   <p>
-    const taskDescriptionPara = document.createElement("p");
-    taskDescriptionPara.appendChild(document.createTextNode(taskItems[i].description));
-    taskDescription.appendChild(taskDescriptionPara);
+    //                                   <p>
+      const taskDescriptionPara = document.createElement("p");
+      taskDescriptionPara.appendChild(document.createTextNode(tasks[i].description));
+      taskDescription.appendChild(taskDescriptionPara);
+    }
+    
   //                                     Item description once again. Hopefully this works.
   //                                   </p>
   //                                 </div>
   //                               </div>
   //                               <div class="task-date-container buttonish-elem-2">
+  if (tasks[i].dueDate !== undefined) {
     const taskDateContainer = document.createElement("div");
     taskDateContainer.classList.add("task-date-container", "buttonish-elem-2");
     taskItemContent.appendChild(taskDateContainer);
@@ -289,10 +283,15 @@ export default function ProjectTasks() {
   //                                   <span class="date">
     const dateSpan = document.createElement("span");
     dateSpan.classList.add("date");
-    // const currentDate = new Date();
-    // const dateString = currentDate.toLocaleDateString();
-    dateSpan.appendChild(document.createTextNode(taskItems[i].date));
+
+    if (tasks[i].dueDate === new Date().toLocaleDateString()) {
+      dateSpan.appendChild(document.createTextNode("Today"));
+    } else {
+      dateSpan.appendChild(document.createTextNode(tasks[i].dueDate));
+    };
+    
     dateIcon.appendChild(dateSpan);
+  }
   //                                     Today
   //                                   </span>
   //                                 </span>

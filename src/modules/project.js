@@ -5,7 +5,7 @@ export default class Project {
   }
   
   get defaultProjectName() {
-    return "New Project";
+    return "First Project";
   }
 
   get initialTodos() {

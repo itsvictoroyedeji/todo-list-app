@@ -4,11 +4,35 @@ import ProjectTasks from "./pages/projectTasks";
 import AddTaskModal from "./modals/addTask";
 import User from "./modules/user";
 import Project from "./modules/project";
-import Todos from "./modules/todos";
 import TodoFactory from "./modules/todo-factory";
+// import { defaultUser }  from "./modals/default-user";
+
+let defaultUser;
+
+// Initialize default user name and project if empty
+if (defaultUser === undefined) {
+  defaultUser = new User({
+  name: "Victor",
+  projects: [
+    new Project({
+  })
+  ]
+  });
+
+  defaultUser.projects[0].addTodo(
+    TodoFactory ({
+      title: "First task",
+      description: "First description",
+      dueDate: new Date().toLocaleDateString(),
+      priority: "Priority 4"
+    })
+  );
+}
+
+
 
 // Display Default Project Task + Add Task Modal's HTML
-ProjectTasks();
+ProjectTasks(defaultUser);
 AddTaskModal();
 
 // + Add Task button to popup dialog
@@ -41,31 +65,3 @@ function taskSubmit(e) {
 mainDialog.addEventListener("mouseover", (e) => {
   e.preventDefault();
 })
-
-// Test users setups
-// const vic = new User({
-//   name: "Vic"
-// });
-
-// console.log(vic);
-// vic.addNewProject(
-//   new Project({
-//     name: "First Project"
-//   })
-// );
-
-// vic.projects[0].addTodo(
-//   TodoFactory({
-//     title: "First todo"
-//   })
-// );
-
-// vic.projects[0].addTodo(
-//   TodoFactory({
-//     title: "Second todo"
-//   })
-// );
-
-// vic.projects[0].deleteTodo(1);
-
-//  console.log(vic.getProjects);

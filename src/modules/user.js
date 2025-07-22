@@ -1,7 +1,7 @@
 export default class User {
   constructor({name, projects}) {
     this.name = name || this.defaultName;
-    this.projects = projects || this.defaultProject; // New Project Object within an array
+    this.projects = projects || this.defaultProject; // New Project Array
   }
 
   get defaultName() {
