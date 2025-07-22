@@ -1,7 +1,11 @@
 import "./styles.css";
 import { greeting } from "./greetings"; // remove this line and src/greetings.js file
 import ProjectTasks from "./pages/projectTasks";
-import AddTaskModal from "./modals/addTask"
+import AddTaskModal from "./modals/addTask";
+import User from "./modules/user";
+import Project from "./modules/project";
+import Todos from "./modules/todos";
+import TodoFactory from "./modules/todo-factory";
 
 // Display Default Project Task + Add Task Modal's HTML
 ProjectTasks();
@@ -12,7 +16,7 @@ const addTaskButton = document.querySelector('.add-task-button');
 const mainDialog = document.querySelector('#addTaskDialog');
 const submitButton = document.querySelector('.submit-button');
 const cancelButton = document.querySelector('.cancel-button');
-const formCloseButton = document.querySelector('.form-close-button')
+const formCloseButton = document.querySelector('.form-close-button');
 
 addTaskButton.addEventListener("click", () => {
   mainDialog.showModal();
@@ -38,4 +42,30 @@ mainDialog.addEventListener("mouseover", (e) => {
   e.preventDefault();
 })
 
+// Test users setups
+// const vic = new User({
+//   name: "Vic"
+// });
 
+// console.log(vic);
+// vic.addNewProject(
+//   new Project({
+//     name: "First Project"
+//   })
+// );
+
+// vic.projects[0].addTodo(
+//   TodoFactory({
+//     title: "First todo"
+//   })
+// );
+
+// vic.projects[0].addTodo(
+//   TodoFactory({
+//     title: "Second todo"
+//   })
+// );
+
+// vic.projects[0].deleteTodo(1);
+
+//  console.log(vic.getProjects);

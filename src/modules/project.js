@@ -1,23 +1,27 @@
 export default class Project {
   constructor({name, todos}) {
     this.name = name || this.defaultProjectName;
-    this.todos = todos; // new Todos object
+    this.todos = todos || this.initialTodos; // new Todos array
   }
   
   get defaultProjectName() {
     return "New Project";
   }
 
+  get initialTodos() {
+    return [];
+  }
+
   get getTodos() {
-    return this.todos.todosList;
+    return this.todos;
   }
  
   addTodo(todo) {
-    this.todos.createTodo(todo); 
+    this.todos.push(todo); 
   }
 
   deleteTodo(index) {
-    this.todos.removeTodo(index);
+    this.todos.splice(index, 1);
   }
   
 }

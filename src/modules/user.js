@@ -12,7 +12,7 @@ export default class User {
     return [];
   }
 
-  get getListOfProjects() {
+  get getProjects() {
     return this.projects;
   }
 
