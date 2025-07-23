@@ -1,9 +1,9 @@
 // Shows Project Task page
 export default function ProjectTasks(user) {
-  console.log(user);
 
   // <main id="content" tabindex="-1"> - The root element that doesn't change
   const mainContent = document.querySelector("#content");
+  mainContent.textContent = "";
 
   // global variable declaration
   const svgNS = "http://www.w3.org/2000/svg";
@@ -206,11 +206,11 @@ export default function ProjectTasks(user) {
 
     //Change border color depending on priority
     if (tasks[i].priority === "Priority 1") {
-      buttonBorder.style.borderColor = "red";
+      buttonBorder.style.border = "2px solid red";
     } else if (tasks[i].priority === "Priority 2") {
-      buttonBorder.style.borderColor = "green";
+      buttonBorder.style.border = "2px solid green";
     } else if (tasks[i].priority === "Priority 3") {
-      buttonBorder.style.borderColor = "blue";
+      buttonBorder.style.border = "2px solid blue";
     } else if (tasks[i].priority === "Priority 4") {
       buttonBorder.style.borderColor = "var(--tint)";
     }
@@ -236,7 +236,7 @@ export default function ProjectTasks(user) {
   //                                   Do a review of something inside here
   //                                 </div>
   //                                 <div class="task-description">
-    if (tasks[i].description !== undefined) {
+    if (tasks[i].description) {
       const taskDescription = document.createElement("div");
       taskDescription.classList.add("task-description");
       taskItemWrapper.appendChild(taskDescription);
@@ -252,7 +252,7 @@ export default function ProjectTasks(user) {
   //                                 </div>
   //                               </div>
   //                               <div class="task-date-container buttonish-elem-2">
-  if (tasks[i].dueDate !== undefined) {
+  if (tasks[i].dueDate) {
     const taskDateContainer = document.createElement("div");
     taskDateContainer.classList.add("task-date-container", "buttonish-elem-2");
     taskItemContent.appendChild(taskDateContainer);

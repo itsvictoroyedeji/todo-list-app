@@ -29,39 +29,68 @@ if (defaultUser === undefined) {
   );
 }
 
-
+initLoader();
 
 // Display Default Project Task + Add Task Modal's HTML
-ProjectTasks(defaultUser);
-AddTaskModal();
+function initLoader() {
+  ProjectTasks(defaultUser);
+  AddTaskModal();
+  attachEventListeners();
+  console.log(defaultUser);
+};
 
-// + Add Task button to popup dialog
-const addTaskButton = document.querySelector('.add-task-button');
-const mainDialog = document.querySelector('#addTaskDialog');
-const submitButton = document.querySelector('.submit-button');
-const cancelButton = document.querySelector('.cancel-button');
-const formCloseButton = document.querySelector('.form-close-button');
+function attachEventListeners() {
+  const addTaskButton = document.querySelector('.add-task-button');
+  const mainDialog = document.querySelector('#addTaskDialog');
+  const submitButton = document.querySelector('.submit-button');
+  const cancelButton = document.querySelector('.cancel-button');
+  const formCloseButton = document.querySelector('.form-close-button');
+  const taskName = document.querySelector('#task-name');
+  const taskDescription = document.querySelector('#task-description');
+  const taskDueDate = document.querySelector('#task-date');
+  const taskPriority = document.querySelector('#task-priority');
 
-addTaskButton.addEventListener("click", () => {
-  mainDialog.showModal();
-});
+  // + Add Task button to popup dialog
 
-cancelButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  mainDialog.close();
-});
+  addTaskButton.addEventListener("click", (e) => 
+    mainDialog.showModal()
+  );
 
-formCloseButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  mainDialog.close();
-});
+  cancelButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    mainDialog.close();
+  });
 
-submitButton.addEventListener("click", taskSubmit);
-function taskSubmit(e) {
-  e.preventDefault();
-  console.log(e);
+  formCloseButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    mainDialog.close();
+  });
+
+  submitButton.addEventListener("click", taskSubmit);
+
+  // Add new Task Data to User
+  function taskSubmit(e) {
+    e.preventDefault();
+
+    if (taskName.value.length > 0) {
+      defaultUser.projects[0].addTodo(
+        TodoFactory ({
+          title: taskName.value,
+          description: taskDescription.value,
+          dueDate: taskDueDate.value,
+          priority: taskPriority.value
+        })
+      );
+      // Reload updated DOM and event listeners
+      mainDialog.textContent = "";
+      initLoader();
+    } else {
+      window.alert("Task name is required");
+      return false;
+    };
+    mainDialog.close();
+  };
 }
 
-mainDialog.addEventListener("mouseover", (e) => {
-  e.preventDefault();
-})
+
+
