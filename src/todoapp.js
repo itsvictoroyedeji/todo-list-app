@@ -7,6 +7,10 @@ import Project from "./modules/project";
 import TodoFactory from "./modules/todo-factory";
 // import { defaultUser }  from "./modals/default-user";
 
+document.addEventListener('DOMContentLoaded',() => {
+   initLoader();
+});
+
 let defaultUser;
 
 // Initialize default user name and project if empty
@@ -29,9 +33,7 @@ if (defaultUser === undefined) {
   );
 }
 
-initLoader();
-
-// Display Default Project Task + Add Task Modal's HTML
+// Display Default Project Task + Add Task Modal's HTML + Event Listeners
 function initLoader() {
   ProjectTasks(defaultUser);
   AddTaskModal();
