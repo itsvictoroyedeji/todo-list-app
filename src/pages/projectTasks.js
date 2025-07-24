@@ -284,7 +284,7 @@ export default function ProjectTasks(user) {
     const dateSpan = document.createElement("span");
     dateSpan.classList.add("date");
 
-    if (tasks[i].dueDate === new Date().toLocaleDateString()) {
+    if (tasks[i].dueDate === new Date().toLocaleDateString("en-CA")) {
       dateSpan.appendChild(document.createTextNode("Today"));
     } else {
       dateSpan.appendChild(document.createTextNode(tasks[i].dueDate));

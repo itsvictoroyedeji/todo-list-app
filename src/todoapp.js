@@ -27,7 +27,7 @@ if (defaultUser === undefined) {
     TodoFactory ({
       title: "First task",
       description: "First description",
-      dueDate: new Date().toLocaleDateString(),
+      dueDate: new Date().toLocaleDateString("en-CA"),
       priority: "Priority 4"
     })
   );
@@ -43,48 +43,79 @@ function initLoader() {
 
 function attachEventListeners() {
   const addTaskButton = document.querySelector('.add-task-button');
+  const editTaskButton = document.getElementsByClassName('task-list-edit-button');
   const mainDialog = document.querySelector('#addTaskDialog');
   const submitButton = document.querySelector('.submit-button');
   const cancelButton = document.querySelector('.cancel-button');
   const formCloseButton = document.querySelector('.form-close-button');
-  const taskName = document.querySelector('#task-name');
-  const taskDescription = document.querySelector('#task-description');
-  const taskDueDate = document.querySelector('#task-date');
-  const taskPriority = document.querySelector('#task-priority');
+  const formTaskName = document.querySelector('#task-name');
+  const formTaskDescription = document.querySelector('#task-description');
+  const formTaskDueDate = document.querySelector('#task-date');
+  const formTaskPriority = document.querySelector('#task-priority');
+  const addText = "Add";
+  const saveText = "Save";
+  let taskItemIndex;
+  
 
   // + Add Task button to popup dialog
-
-  addTaskButton.addEventListener("click", (e) => 
-    mainDialog.showModal()
+  addTaskButton.addEventListener("click", (e) => {
+    mainDialog.showModal();
+    submitButton.textContent = addText;
+    }
   );
+
+  Array.from(editTaskButton).forEach((button) => 
+    button.addEventListener("click", (e) => {
+      mainDialog.showModal();
+      taskItemIndex = e.target.closest("li").dataset.index;
+      // const projectItem = document.querySelector(`.project-item[data-index="${taskItemIndex}"]`);
+      const taskItems = defaultUser.projects[0].getTodos[taskItemIndex];
+      formTaskName.value = taskItems.title;
+      formTaskDescription.value = taskItems.description;
+      formTaskDueDate.value = taskItems.dueDate;
+      formTaskPriority.value = taskItems.priority;
+
+      submitButton.textContent = saveText;
+    }
+  ));
 
   cancelButton.addEventListener("click", (e) => {
     e.preventDefault();
     mainDialog.close();
+    formTaskName.value = "";
+    formTaskDescription.value = "";
+    formTaskDueDate.value = "";
+    formTaskPriority.priority = "";
   });
 
   formCloseButton.addEventListener("click", (e) => {
     e.preventDefault();
     mainDialog.close();
+    formTaskName.value = "";
+    formTaskDescription.value = "";
+    formTaskDueDate.value = "";
+    formTaskPriority.priority = "";
   });
 
   submitButton.addEventListener("click", taskSubmit);
 
-  // Add new Task Data to User
+  // Add New or Edit Task Data to User's Project
   function taskSubmit(e) {
     e.preventDefault();
 
-    if (taskName.value.length > 0) {
+
+    if (formTaskName.value.length > 0) {
+      
       defaultUser.projects[0].addTodo(
         TodoFactory ({
-          title: taskName.value,
-          description: taskDescription.value,
-          dueDate: taskDueDate.value,
-          priority: taskPriority.value
+          title: formTaskName.value,
+          description: formTaskDescription.value,
+          dueDate: formTaskDueDate.value,
+          priority: formTaskPriority.value
         })
       );
-      // Reload updated DOM and event listeners
-      mainDialog.textContent = "";
+      // Reload updated DOM and event listeners 
+      mainDialog.textContent = '';
       initLoader();
     } else {
       window.alert("Task name is required");

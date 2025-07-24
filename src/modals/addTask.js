@@ -2,12 +2,13 @@ export default function addTaskModal() {
 
   // Get Root dialog element
   const mainDialog = document.querySelector("#addTaskDialog");
-
+  
   // global variable declaration
   const svgNS = "http://www.w3.org/2000/svg";
   const formTitle = "Add new task";
   const cancelButtonText = "Cancel";
   const addButtonText = "Add";
+  const saveButtonText = "Save";
 
   // Add task dialog
   // <div class="form-section">
@@ -318,7 +319,13 @@ export default function addTaskModal() {
   const submitButton = document.createElement("button");
   submitButton.classList.add("button", "submit-button", "buttonish-elem");
   submitButton.setAttribute("type", "submit");
-  submitButton.appendChild(document.createTextNode(addButtonText));
+
+  if (taskNameInput.value.length > 0) {
+    submitButton.appendChild(document.createTextNode(editButtonText));
+  } else {
+    submitButton.appendChild(document.createTextNode(addButtonText));
+  }
+  
   footerFormButtons2.appendChild(submitButton);
 
   //             Add
