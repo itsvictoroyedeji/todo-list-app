@@ -45,6 +45,7 @@ function initLoader() {
 function attachEventListeners() {
   const addTaskButton = document.querySelector('.add-task-button');
   const editTaskButton = document.getElementsByClassName('task-list-edit-button');
+  const deleteTaskButton = document.getElementsByClassName('task-list-delete-button');
   const mainDialog = document.querySelector('#addTaskDialog');
   const submitButton = document.querySelector('.submit-button');
   const cancelButton = document.querySelector('.cancel-button');
@@ -56,7 +57,7 @@ function attachEventListeners() {
   const addText = "Add";
   const saveText = "Save";
   let taskItemIndex;
-  
+  let taskItem;
 
   // + Add Task button to popup dialog
   addTaskButton.addEventListener("click", (e) => {
@@ -70,11 +71,11 @@ function attachEventListeners() {
       mainDialog.showModal();
       taskItemIndex = e.target.closest("li").dataset.index;
       // const projectItem = document.querySelector(`.project-item[data-index="${taskItemIndex}"]`);
-      const taskItems = defaultUser.projects[0].getTodos[taskItemIndex];
-      formTaskName.value = taskItems.title;
-      formTaskDescription.value = taskItems.description;
-      formTaskDueDate.value = taskItems.dueDate;
-      formTaskPriority.value = taskItems.priority;
+      taskItem = defaultUser.projects[0].getTodos[taskItemIndex];
+      formTaskName.value = taskItem.title;
+      formTaskDescription.value = taskItem.description;
+      formTaskDueDate.value = taskItem.dueDate;
+      formTaskPriority.value = taskItem.priority;
 
       if (formTaskPriority.value === "Priority 1") {
         formTaskPriority.style.borderColor = "red";
@@ -89,6 +90,19 @@ function attachEventListeners() {
       submitButton.textContent = saveText;
     }
   ));
+
+  Array.from(deleteTaskButton).forEach((button) => 
+    button.addEventListener("click", (e) => {
+      if (confirm("Are you sure you want to delete this task?")) {;
+        taskItemIndex = e.target.closest("li").dataset.index;
+        defaultUser.projects[0].deleteTodo(taskItemIndex);
+        console.log(defaultUser);
+        // Reload DOM
+        mainDialog.textContent = '';
+        initLoader();
+      }
+    })
+  );
 
   cancelButton.addEventListener("click", (e) => {
     e.preventDefault();
