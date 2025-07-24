@@ -30,15 +30,16 @@ if (defaultUser === undefined) {
       dueDate: new Date().toLocaleDateString("en-CA"),
       priority: "Priority 4"
     })
-  );
-}
+  )
+  
+};
 
 // Display Default Project Task + Add Task Modal's HTML + Event Listeners
 function initLoader() {
   ProjectTasks(defaultUser);
   AddTaskModal();
   attachEventListeners();
-  console.log(defaultUser);
+  // console.log(defaultUser);
 };
 
 function attachEventListeners() {
@@ -75,6 +76,16 @@ function attachEventListeners() {
       formTaskDueDate.value = taskItems.dueDate;
       formTaskPriority.value = taskItems.priority;
 
+      if (formTaskPriority.value === "Priority 1") {
+        formTaskPriority.style.borderColor = "red";
+      } else if (formTaskPriority.value === "Priority 2") {
+        formTaskPriority.style.borderColor = "green";
+      } else if (formTaskPriority.value === "Priority 3") {
+        formTaskPriority.style.borderColor = "blue";
+      } else if (formTaskPriority.value === "Priority 4") {
+        formTaskPriority.style.borderColor = "#e6e6e6";
+      }
+      // Change submit button
       submitButton.textContent = saveText;
     }
   ));
@@ -103,17 +114,27 @@ function attachEventListeners() {
   function taskSubmit(e) {
     e.preventDefault();
 
-
     if (formTaskName.value.length > 0) {
-      
-      defaultUser.projects[0].addTodo(
-        TodoFactory ({
-          title: formTaskName.value,
-          description: formTaskDescription.value,
-          dueDate: formTaskDueDate.value,
-          priority: formTaskPriority.value
-        })
-      );
+      if (submitButton.textContent === addText) {
+        defaultUser.projects[0].addTodo(
+          TodoFactory ({
+            title: formTaskName.value,
+            description: formTaskDescription.value,
+            dueDate: formTaskDueDate.value,
+            priority: formTaskPriority.value
+          })
+        );
+      } else if (submitButton.textContent === saveText) {
+        defaultUser.projects[0].editTodo(
+          taskItemIndex,
+          TodoFactory ({
+            title: formTaskName.value,
+            description: formTaskDescription.value,
+            dueDate: formTaskDueDate.value,
+            priority: formTaskPriority.value
+          })
+        )
+      }
       // Reload updated DOM and event listeners 
       mainDialog.textContent = '';
       initLoader();

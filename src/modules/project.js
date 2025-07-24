@@ -20,6 +20,10 @@ export default class Project {
     this.todos.push(todo); 
   }
 
+  editTodo(index, todo) {
+    this.todos.splice(index, 1, todo)
+  }
+
   deleteTodo(index) {
     this.todos.splice(index, 1);
   }
