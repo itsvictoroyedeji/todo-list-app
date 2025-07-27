@@ -8,7 +8,6 @@ export default function addTaskModal(user) {
   const formTitle = "Add new task";
   const cancelButtonText = "Cancel";
   const addButtonText = "Add";
-  const saveButtonText = "Save";
 
   // Add task dialog
   // <div class="form-section">

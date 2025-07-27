@@ -929,13 +929,15 @@ a {
 }
 
 /* Add Task modal */
-#addTaskDialog[open] {
+#addTaskDialog[open],
+#addProjectDialog[open] {
   position: fixed;
   inset: 0 0 0 0;
   margin: auto;
 }
 
-#addTaskDialog {
+#addTaskDialog,
+#addProjectDialog {
   width: clamp(300px, 80%, 475px);
   /* width: 50%; */
   /* margin: 5em auto; */
@@ -961,7 +963,8 @@ a {
   }
 }
 
-#addTaskDialog::backdrop {
+#addTaskDialog::backdrop,
+#addProjectDialog::backdrop {
   background-color: rgba(0, 0, 0, .4);
 }
 
