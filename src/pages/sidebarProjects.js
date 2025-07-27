@@ -1,4 +1,4 @@
-export default function sidebarProjects(user) {
+export default function sidebarProjects(user, projectItemIndex) {
   // <ul id="sidebar-projects-list" tab-index="-1" class="">
   const sidebarProjectsList = document.querySelector("#sidebar-projects-list");
   sidebarProjectsList.textContent = "";
@@ -42,6 +42,13 @@ export default function sidebarProjects(user) {
      projectItemTaskLength.appendChild(projectItemTaskLengthSpan)
 
   }
+
+  // Highlight selected project on sidebar
+  const selectedProjects = document.getElementsByClassName(`sidebar-project-list-item`);
+  Array.from(selectedProjects).forEach(project => project.classList.remove("sidebar-active"));
+  
+  const selectedProject = document.querySelector(`.sidebar-project-list-item[data-index="${projectItemIndex}"]`);
+  selectedProject.classList.add("sidebar-active");
   //     </span>
   //   </div>  
   // </li>

@@ -116,6 +116,7 @@ body {
   --menu-button-width: 24px;
   --sidebar-item-hover: #efedf2;
   --sidebar-item-darker-hover: #e1dfe3;
+  --sidebar-item-active: #eed1dd;
   --main-item-hover: #f2efed;
   --sidebar-toggle-transition-duration: 0.3s;
   --sidebar-toggle-transition-function: cubic-bezier(.4,0,.2,1);
@@ -367,8 +368,12 @@ a {
   position: relative;
 }
 
-.sidebar-project-list-item:hover {
+.sidebar-project-list-item:hover:not(.sidebar-active) {
   background: var(--sidebar-item-hover);
+}
+
+.sidebar-active {
+  background: var(--sidebar-item-active);
 }
 
 .sidebar-project-list-item-container {

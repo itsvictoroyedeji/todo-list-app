@@ -1,5 +1,5 @@
 // Shows Project Task page
-export default function ProjectTasks(user) {
+export default function ProjectTasks(user, projectIndex) {
 
   // <main id="content" tabindex="-1"> - The root element that doesn't change
   const mainContent = document.querySelector("#content");
@@ -107,7 +107,7 @@ export default function ProjectTasks(user) {
   //               <h1 class="large-header-text">Default Project</h1>
   const headerContainerText = document.createElement("h1");
   headerContainerText.classList.add("large-header-text");
-  headerContainerText.appendChild(document.createTextNode(user.projects[0].name)); // <-- Active Project Name
+  headerContainerText.appendChild(document.createTextNode(user.projects[projectIndex].name)); // <-- Active Project Name
   headerContainer2.appendChild(headerContainerText);
   //             </div>
   //           </div>
@@ -143,7 +143,7 @@ export default function ProjectTasks(user) {
   projectItemsContainer.classList.add("project-items-container");
 
   // LOOP TASKS
-  const tasks = user.projects[0].todos;
+  const tasks = user.projects[projectIndex].todos;
 
   //                       <!-- Each project item -->
   for (let i = 0 ; i < tasks.length ; i++) {

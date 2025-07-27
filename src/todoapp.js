@@ -8,7 +8,8 @@ import TodoFactory from "./modules/todo-factory";
 import SidebarProjects from "./pages/sidebarProjects"
 
 document.addEventListener('DOMContentLoaded',() => {
-   initLoader();
+  const initialProjectIndex = 0;
+  initLoader(initialProjectIndex);
 });
 
 let defaultUser;
@@ -24,7 +25,7 @@ if (defaultUser === undefined) {
 
   defaultUser.projects[0].addTodo(
     TodoFactory ({
-      title: "First task",
+      title: "First task of first project",
       description: "First description",
       dueDate: new Date().toLocaleDateString("en-CA"),
       priority: "Priority 4"
@@ -36,7 +37,7 @@ if (defaultUser === undefined) {
       name: "2nd project",
       todos: [
         TodoFactory ({
-          title: "First task",
+          title: "First task of 2nd project",
           description: "First description",
           dueDate: new Date().toLocaleDateString("en-CA"),
           priority: "Priority 4"
@@ -51,23 +52,37 @@ if (defaultUser === undefined) {
     })
   )
   console.log(defaultUser);
-  
 };
 
+
+
 // Display Default Project Task + Add Task Modal's HTML + Event Listeners
-function initLoader() {
-  SidebarProjects(defaultUser);
-  ProjectTasks(defaultUser);
-  AddTaskModal();
+function initLoader(projectItemIndex) {
+  SidebarProjects(defaultUser, projectItemIndex);
+  ProjectTasks(defaultUser, projectItemIndex);
+  AddTaskModal(defaultUser);
   attachEventListeners();
   // console.log(defaultUser);
 };
 
-// Change sidebar's title
-const sidebarTitle = document.querySelector(".sidebar-username span");
-sidebarTitle.textContent = `${defaultUser.name}'s Tasks`;
+let projectItemIndex;
 
 export function attachEventListeners() {
+  // Change sidebar's title
+  const sidebarTitle = document.querySelector(".sidebar-username span");
+  sidebarTitle.textContent = `${defaultUser.name}'s Tasks`;
+
+  // Sidebar project event listener
+  const sidebarProjects = document.getElementsByClassName("sidebar-project-list-item");
+
+  Array.from(sidebarProjects).forEach((project) => {
+    project.addEventListener("click", (e) => {
+      projectItemIndex = e.target.closest("li").dataset.index;
+      initLoader(projectItemIndex);
+    })
+  });
+
+  // Add Task form event listeners
   const addTaskButton = document.querySelector('.add-task-button');
   const editTaskButton = document.getElementsByClassName('task-list-edit-button');
   const deleteTaskButton = document.getElementsByClassName('task-list-delete-button');
