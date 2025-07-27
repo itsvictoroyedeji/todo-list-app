@@ -103,6 +103,7 @@ export function attachEventListeners() {
   const editTaskButton = document.getElementsByClassName('task-list-edit-button');
   const deleteTaskButton = document.getElementsByClassName('task-list-delete-button');
   const taskDialog = document.querySelector('#addTaskDialog');
+  const taskDialogHeader = document.querySelector('#addTaskDialog .form-header-text');
   const taskSubmitButton = document.querySelector('#addTaskDialog .submit-button');
   const taskCancelButton = document.querySelector('#addTaskDialog .cancel-button');
   const taskFormCloseButton = document.querySelector('#addTaskDialog .form-close-button');
@@ -116,6 +117,8 @@ export function attachEventListeners() {
   const saveText = "Save";
   const addProjectHeaderText = "Add project";
   const editProjectHeaderText = "Edit project";
+  const addTaskHeaderText = "Add new task";
+  const editTaskHeaderText = "Edit task";
   let taskItemIndex;
   let taskItem;
   let projectItem;
@@ -147,7 +150,6 @@ export function attachEventListeners() {
   const activeProject = document.querySelector(".sidebar-project-list-item.sidebar-active");
 
   let activeProjectIndex;
-
   if (defaultUser.projects.length > 0) {
     activeProjectIndex = activeProject.dataset.index;
   }
@@ -254,16 +256,18 @@ export function attachEventListeners() {
   if (defaultUser.projects.length > 0) {
     // + Add Task button to popup dialog
     addTaskButton.addEventListener("click", (e) => {
-    taskDialog.showModal();
-    taskSubmitButton.textContent = addText;
-    }
-  );
+      taskDialog.showModal();
+      taskDialogHeader.textContent = addTaskHeaderText;
+      taskSubmitButton.textContent = addText;
+      }
+    );
   }
 
   // Edit Task button to popup dialog
   Array.from(editTaskButton).forEach((button) => 
     button.addEventListener("click", (e) => {
       taskDialog.showModal();
+      taskDialogHeader.textContent = editTaskHeaderText;
       taskItemIndex = e.target.closest("li").dataset.index;
       // const projectItem = document.querySelector(`.project-item[data-index="${taskItemIndex}"]`);
       taskItem = defaultUser.projects[activeProjectIndex].getTodos[taskItemIndex];
