@@ -1,4 +1,4 @@
-export default function addTaskModal() {
+export default function addTaskModal(user) {
 
   // Get Root dialog element
   const mainDialog = document.querySelector("#addTaskDialog");
@@ -265,11 +265,8 @@ export default function addTaskModal() {
   taskProjectSelect.name = "task-project";
   taskProjectSelect.autofocus = true;
  
-  const userProjects = [
-    {
-      name: "(current project)"
-    }
-  ];
+  const userProjects = user.projects;
+  console.log(userProjects)
 
   for (let i = 0 ; i < userProjects.length ; i++) {
     const projectOption = document.createElement("option");
