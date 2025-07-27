@@ -9,7 +9,7 @@ export default function addProjectModal(user) {
   const cancelButtonText = "Cancel";
   const addButtonText = "Add";
 
-  // Add task dialog
+  // Add project dialog
   // <div class="form-section">
   const formSection = document.createElement("div");
   formSection.classList.add("form-section");
@@ -42,7 +42,7 @@ export default function addProjectModal(user) {
   formHeaderText.appendChild(document.createTextNode(formTitle));
   formHeaderTitle.appendChild(formHeaderText);
 
-  //             Add new task
+  //             Add new project
   //           </h1>
   //         </div>
   //         <div class="form-close-container">

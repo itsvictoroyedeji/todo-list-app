@@ -21,7 +21,7 @@ export default class Project {
   }
 
   editTodo(index, todo) {
-    this.todos.splice(index, 1, todo)
+    this.todos.splice(index, 1, todo);
   }
 
   deleteTodo(index) {
