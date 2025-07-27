@@ -13,10 +13,12 @@ document.addEventListener('DOMContentLoaded',() => {
   initLoader(initialProjectIndex);
 });
 
-// Global initializations 
+// GLOBAL initializations 
 let defaultUser;
 let projectItemIndex;
 let newProjectIndex;
+const mainDialog = document.querySelector("#content");
+const sidebarProjectsList = document.querySelector("#sidebar-projects-list");
 
 // Initialize default user name and project if empty
 if (defaultUser === undefined) {
@@ -27,45 +29,55 @@ if (defaultUser === undefined) {
     ]
   });
 
-  defaultUser.projects[0].addTodo(
-    TodoFactory ({
-      title: "First task of first project",
-      description: "First description",
-      dueDate: new Date().toLocaleDateString("en-CA"),
-      priority: "Priority 4"
-    })
-  )
+  // defaultUser.projects[0].addTodo(
+  //   TodoFactory ({
+  //     title: "First task of first project",
+  //     description: "First description",
+  //     dueDate: new Date().toLocaleDateString("en-CA"),
+  //     priority: "Priority 4"
+  //   })
+  // )
 
-  defaultUser.addNewProject(
-    new Project({
-      name: "2nd project",
-      todos: [
-        TodoFactory ({
-          title: "First task of 2nd project",
-          description: "First description",
-          dueDate: new Date().toLocaleDateString("en-CA"),
-          priority: "Priority 4"
-        }),
-        TodoFactory ({
-          title: "2nd task",
-          description: "Second description",
-          dueDate: new Date().toLocaleDateString("en-CA"),
-          priority: "Priority 4"
-        }),
-      ]
-    })
-  );
-  console.log(defaultUser);
+  // defaultUser.addNewProject(
+  //   new Project({
+  //     name: "2nd project",
+  //     todos: [
+  //       TodoFactory ({
+  //         title: "First task of 2nd project",
+  //         description: "First description",
+  //         dueDate: new Date().toLocaleDateString("en-CA"),
+  //         priority: "Priority 4"
+  //       }),
+  //       TodoFactory ({
+  //         title: "2nd task",
+  //         description: "Second description",
+  //         dueDate: new Date().toLocaleDateString("en-CA"),
+  //         priority: "Priority 4"
+  //       }),
+  //     ]
+  //   })
+  // );
 };
 
 // ------- DEFAULT INTI -----
 // Display Default Project Task + Add Task Modal's HTML + Event Listeners
+
 function initLoader(projectItemIndex) {
-  SidebarProjects(defaultUser, projectItemIndex);
-  ProjectTasks(defaultUser, projectItemIndex);
-  AddProjectModal(defaultUser);
-  AddTaskModal(defaultUser);
-  attachEventListeners();
+  if (defaultUser.projects.length > 0) {
+    SidebarProjects(defaultUser, projectItemIndex);
+    ProjectTasks(defaultUser, projectItemIndex);
+    AddProjectModal(defaultUser);
+    AddTaskModal(defaultUser);
+    attachEventListeners();
+
+  } else {
+    mainDialog.textContent = "";
+    sidebarProjectsList.textContent = "";
+    AddProjectModal(defaultUser);
+    AddTaskModal(defaultUser);
+    // attachEventListeners();
+  }
+  console.log(defaultUser);
 };
 
 export function attachEventListeners() {
@@ -76,7 +88,7 @@ export function attachEventListeners() {
   // Add Project form event listeners
   const sidebarAddProjectButton = document.querySelector(".sidebar-projects-add button");
   const editProjectButton = document.querySelector('.edit-project-button');
-  const deleteProjectButton = document.querySelector('.edit-project-button');
+  const deleteProjectButton = document.querySelector('.delete-project-button');
   const projectDialog = document.querySelector('#addProjectDialog');
   const projectDialogHeader = document.querySelector('#addProjectDialog .form-header-text');
   const formProjectName = document.querySelector('#project-name');
@@ -118,10 +130,10 @@ export function attachEventListeners() {
     formProjectName.value = "";
   };
 
-   // Sidebar project event listener
+  // Sidebar projects selector
   const sidebarProjectSelectors = document.getElementsByClassName("sidebar-project-list-item");
 
-  //
+  // Sidebar projects event listener
   Array.from(sidebarProjectSelectors).forEach((project) => {
     project.addEventListener("click", (e) => {
       projectItemIndex = e.target.closest("li").dataset.index;
@@ -132,7 +144,10 @@ export function attachEventListeners() {
 
   // Active project + Active project index selector
   const activeProject = document.querySelector(".sidebar-project-list-item.sidebar-active");
-  const activeProjectIndex = activeProject.dataset.index;
+  let activeProjectIndex;
+  if (defaultUser.projects.length > 0) {
+    activeProjectIndex = activeProject.dataset.index;
+  }
 
   // Sidebar's "+ Add Task" button
   sidebarAddTaskButton.addEventListener("click", () => {
@@ -153,10 +168,20 @@ export function attachEventListeners() {
     projectDialogHeader.textContent = editProjectHeaderText;
     projectSubmitButton.textContent = saveText;
 
-    // Prefill Item
+    // Prefill Form Fields
     projectItem = defaultUser.projects[activeProjectIndex];
     formProjectName.value = projectItem.name;
-  })
+  });
+
+  // Delete Project Button
+  deleteProjectButton.addEventListener("click", (e) => {
+    if (confirm(`The "${defaultUser.projects[activeProjectIndex].name}" project and all of its tasks will be permanently deleted.`)) {
+      defaultUser.deleteProject(activeProjectIndex);
+      // Reload DOM
+      clearModalTextContents();
+      initLoader(0);
+    }
+  });
 
   // Project Form Cancel (x) button
   projectCancelButton.addEventListener("click", (e) => {
@@ -255,7 +280,7 @@ export function attachEventListeners() {
         taskItemIndex = e.target.closest("li").dataset.index;
         defaultUser.projects[activeProjectIndex].deleteTodo(taskItemIndex);
         // Reload DOM
-        taskDialog.textContent = '';
+        clearModalTextContents();
         initLoader(activeProjectIndex);
       }
     })

@@ -40,15 +40,17 @@ export default function sidebarProjects(user, projectItemIndex) {
      const projectItemTaskLengthSpan = document.createElement("span");
      projectItemTaskLengthSpan.appendChild(document.createTextNode(projects[i].todos.length));
      projectItemTaskLength.appendChild(projectItemTaskLengthSpan);
-
+  }
+  
+  if (projects.length > 0) {
+    // Highlight selected project on sidebar
+    const selectedProjects = document.getElementsByClassName(`sidebar-project-list-item`);
+    Array.from(selectedProjects).forEach(project => project.classList.remove("sidebar-active"));
+    
+    const selectedProject = document.querySelector(`.sidebar-project-list-item[data-index="${projectItemIndex}"]`);
+    selectedProject.classList.add("sidebar-active");
   }
 
-  // Highlight selected project on sidebar
-  const selectedProjects = document.getElementsByClassName(`sidebar-project-list-item`);
-  Array.from(selectedProjects).forEach(project => project.classList.remove("sidebar-active"));
-  
-  const selectedProject = document.querySelector(`.sidebar-project-list-item[data-index="${projectItemIndex}"]`);
-  selectedProject.classList.add("sidebar-active");
   //     </span>
   //   </div>  
   // </li>

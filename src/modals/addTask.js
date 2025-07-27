@@ -265,7 +265,6 @@ export default function addTaskModal(user) {
   taskProjectSelect.autofocus = true;
  
   const userProjects = user.projects;
-  console.log(userProjects)
 
   for (let i = 0 ; i < userProjects.length ; i++) {
     const projectOption = document.createElement("option");

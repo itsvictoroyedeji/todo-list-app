@@ -1,5 +1,6 @@
 // Shows Project Task page
 export default function ProjectTasks(user, projectIndex) {
+  if (user.projects.length > 0) {
 
   // <main id="content" tabindex="-1"> - The root element that doesn't change
   const mainContent = document.querySelector("#content");
@@ -370,4 +371,5 @@ export default function ProjectTasks(user, projectIndex) {
   //     </div>  
   //   </div>
   // </main>  
+  }
 }
