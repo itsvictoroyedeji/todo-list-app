@@ -39,7 +39,7 @@ export default function sidebarProjects(user, projectItemIndex) {
   //       <span>5</span>
      const projectItemTaskLengthSpan = document.createElement("span");
      projectItemTaskLengthSpan.appendChild(document.createTextNode(projects[i].todos.length));
-     projectItemTaskLength.appendChild(projectItemTaskLengthSpan)
+     projectItemTaskLength.appendChild(projectItemTaskLengthSpan);
 
   }
 

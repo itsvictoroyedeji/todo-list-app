@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded',() => {
   initLoader(initialProjectIndex);
 });
 
+// Global initializations 
 let defaultUser;
+let projectItemIndex;
 
 // Initialize default user name and project if empty
 if (defaultUser === undefined) {
@@ -54,18 +56,13 @@ if (defaultUser === undefined) {
   console.log(defaultUser);
 };
 
-
-
 // Display Default Project Task + Add Task Modal's HTML + Event Listeners
 function initLoader(projectItemIndex) {
   SidebarProjects(defaultUser, projectItemIndex);
   ProjectTasks(defaultUser, projectItemIndex);
   AddTaskModal(defaultUser);
   attachEventListeners();
-  // console.log(defaultUser);
 };
-
-let projectItemIndex;
 
 export function attachEventListeners() {
   // Change sidebar's title
@@ -78,6 +75,7 @@ export function attachEventListeners() {
   Array.from(sidebarProjects).forEach((project) => {
     project.addEventListener("click", (e) => {
       projectItemIndex = e.target.closest("li").dataset.index;
+      mainDialog.textContent = '';
       initLoader(projectItemIndex);
     })
   });
@@ -98,6 +96,18 @@ export function attachEventListeners() {
   const saveText = "Save";
   let taskItemIndex;
   let taskItem;
+
+  // Active project + Active project index selector
+  const activeProject = document.querySelector(".sidebar-project-list-item.sidebar-active");
+  const activeProjectIndex = activeProject.dataset.index;
+
+  // Sidebar's "Add Task" button
+  const sidebarAddTaskButton = document.querySelector(".sidebar-add-task span");
+
+  sidebarAddTaskButton.addEventListener("click", () => {
+    mainDialog.showModal();
+    submitButton.textContent = addText;
+  })
 
   // Helper function for task form close/cancel buttons
   function clearTaskFormValues() {
@@ -120,7 +130,7 @@ export function attachEventListeners() {
       mainDialog.showModal();
       taskItemIndex = e.target.closest("li").dataset.index;
       // const projectItem = document.querySelector(`.project-item[data-index="${taskItemIndex}"]`);
-      taskItem = defaultUser.projects[0].getTodos[taskItemIndex];
+      taskItem = defaultUser.projects[activeProjectIndex].getTodos[taskItemIndex];
       formTaskName.value = taskItem.title;
       formTaskDescription.value = taskItem.description;
       formTaskDueDate.value = taskItem.dueDate;
@@ -145,11 +155,10 @@ export function attachEventListeners() {
     button.addEventListener("click", (e) => {
       if (confirm("Are you sure you want to delete this task?")) {;
         taskItemIndex = e.target.closest("li").dataset.index;
-        defaultUser.projects[0].deleteTodo(taskItemIndex);
-        console.log(defaultUser);
+        defaultUser.projects[activeProjectIndex].deleteTodo(taskItemIndex);
         // Reload DOM
         mainDialog.textContent = '';
-        initLoader();
+        initLoader(activeProjectIndex);
       }
     })
   );
@@ -177,7 +186,7 @@ export function attachEventListeners() {
 
     if (formTaskName.value.length > 0) {
       if (submitButton.textContent === addText) {
-        defaultUser.projects[0].addTodo(
+        defaultUser.projects[activeProjectIndex].addTodo(
           TodoFactory ({
             title: formTaskName.value,
             description: formTaskDescription.value,
@@ -186,7 +195,7 @@ export function attachEventListeners() {
           })
         );
       } else if (submitButton.textContent === saveText) {
-        defaultUser.projects[0].editTodo(
+        defaultUser.projects[activeProjectIndex].editTodo(
           taskItemIndex,
           TodoFactory ({
             title: formTaskName.value,
@@ -198,7 +207,7 @@ export function attachEventListeners() {
       }
       // Reload updated DOM and event listeners 
       mainDialog.textContent = '';
-      initLoader();
+      initLoader(activeProjectIndex);
     } else {
       window.alert("Task name is required");
       return false;
