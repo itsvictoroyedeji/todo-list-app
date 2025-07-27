@@ -257,6 +257,11 @@ body {
   border-color: var(--lighter-red);
 }
 
+.sidebar-add-task button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .sidebar-projects-list {
   flex-grow: 1;
   overflow: hidden;

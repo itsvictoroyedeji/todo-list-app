@@ -69,13 +69,14 @@ function initLoader(projectItemIndex) {
     AddProjectModal(defaultUser);
     AddTaskModal(defaultUser);
     attachEventListeners();
-
   } else {
     mainDialog.textContent = "";
-    sidebarProjectsList.textContent = "";
+    // sidebarProjectsList.textContent = "";
+    SidebarProjects(defaultUser, projectItemIndex);
+    ProjectTasks(defaultUser, projectItemIndex);
     AddProjectModal(defaultUser);
     AddTaskModal(defaultUser);
-    // attachEventListeners();
+    attachEventListeners();
   }
   console.log(defaultUser);
 };
@@ -97,7 +98,7 @@ export function attachEventListeners() {
   const projectFormCloseButton = document.querySelector('#addProjectDialog .form-close-button');
 
   // Add Task form event listeners
-  const sidebarAddTaskButton = document.querySelector(".sidebar-add-task span");
+  const sidebarAddTaskButton = document.querySelector(".sidebar-add-task button");
   const addTaskButton = document.querySelector('.add-task-button');
   const editTaskButton = document.getElementsByClassName('task-list-edit-button');
   const deleteTaskButton = document.getElementsByClassName('task-list-delete-button');
@@ -142,19 +143,27 @@ export function attachEventListeners() {
     })
   });
 
-  // Active project + Active project index selector
+  // Get Active project + Get Active project index selector
   const activeProject = document.querySelector(".sidebar-project-list-item.sidebar-active");
+
   let activeProjectIndex;
+
   if (defaultUser.projects.length > 0) {
     activeProjectIndex = activeProject.dataset.index;
   }
 
   // Sidebar's "+ Add Task" button
-  sidebarAddTaskButton.addEventListener("click", () => {
-    taskDialog.showModal();
-    taskSubmitButton.textContent = addText;
-  });
-
+  if (defaultUser.projects.length == 0) {
+    sidebarAddTaskButton.disabled = true;
+    console.dir(sidebarAddTaskButton)
+  } else {
+    sidebarAddTaskButton.disabled = false;
+    sidebarAddTaskButton.addEventListener("click", () => {
+      taskDialog.showModal();
+      taskSubmitButton.textContent = addText;
+    });
+  }
+  
   // Sidebar's "+"" (add project) button
   sidebarAddProjectButton.addEventListener("click", () => {
     projectDialog.showModal();
@@ -162,6 +171,7 @@ export function attachEventListeners() {
     projectSubmitButton.textContent = addText;
   });
 
+  if (defaultUser.projects.length > 0) {
   // Edit Project Button
   editProjectButton.addEventListener("click", () => {
     projectDialog.showModal();
@@ -182,6 +192,7 @@ export function attachEventListeners() {
       initLoader(0);
     }
   });
+  }
 
   // Project Form Cancel (x) button
   projectCancelButton.addEventListener("click", (e) => {
@@ -240,12 +251,14 @@ export function attachEventListeners() {
     formTaskPriority.priority = "";
   };
 
-  // + Add Task button to popup dialog
-  addTaskButton.addEventListener("click", (e) => {
+  if (defaultUser.projects.length > 0) {
+    // + Add Task button to popup dialog
+    addTaskButton.addEventListener("click", (e) => {
     taskDialog.showModal();
     taskSubmitButton.textContent = addText;
     }
   );
+  }
 
   // Edit Task button to popup dialog
   Array.from(editTaskButton).forEach((button) => 
