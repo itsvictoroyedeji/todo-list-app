@@ -102,6 +102,7 @@ export function attachEventListeners() {
   const addTaskButton = document.querySelector('.add-task-button');
   const editTaskButton = document.getElementsByClassName('task-list-edit-button');
   const deleteTaskButton = document.getElementsByClassName('task-list-delete-button');
+  const checkedTask = document.getElementsByClassName('task-checkbox');
   const taskDialog = document.querySelector('#addTaskDialog');
   const taskDialogHeader = document.querySelector('#addTaskDialog .form-header-text');
   const taskSubmitButton = document.querySelector('#addTaskDialog .submit-button');
@@ -333,6 +334,18 @@ export function attachEventListeners() {
       }
     })
   );
+
+  Array.from(checkedTask).forEach((button) =>
+    button.addEventListener("click", (e) => {
+      taskItemIndex = e.target.closest("li").dataset.index;
+      defaultUser.projects[activeProjectIndex].todos[taskItemIndex].complete = true;
+      e.target.closest("li").style.opacity = 0;
+      defaultUser.projects[activeProjectIndex].deleteTodo(taskItemIndex);
+      // Reload DOM
+      clearModalTextContents();
+      initLoader(activeProjectIndex);
+    })
+  )
 
   // Task Form Cancel (x) button
   taskCancelButton.addEventListener("click", (e) => {

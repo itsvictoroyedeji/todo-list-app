@@ -652,7 +652,8 @@ a {
   list-style: none;
   display: flex;
   position: relative;
-  
+  opacity: 1;
+  transition: opacity 1s ease-out; /* Fades out over 1 second */
 }
 
 .proj-item-container {
