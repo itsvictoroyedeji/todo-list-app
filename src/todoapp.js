@@ -12,7 +12,7 @@ import AddProjectModal from "./modals/addProject";
 
 document.addEventListener('DOMContentLoaded',() => {
   const initialProjectIndex = 0;
-  initLoader(initialProjectIndex);
+  // initLoader(initialProjectIndex);
 });
 
 // GLOBAL initializations 
@@ -30,35 +30,6 @@ if (defaultUser === undefined) {
       new Project({})
     ]
   });
-
-  // defaultUser.projects[0].addTodo(
-  //   TodoFactory ({
-  //     title: "First task of first project",
-  //     description: "First description",
-  //     dueDate: new Date().toLocaleDateString("en-CA"),
-  //     priority: "Priority 4"
-  //   })
-  // )
-
-  // defaultUser.addNewProject(
-  //   new Project({
-  //     name: "2nd project",
-  //     todos: [
-  //       TodoFactory ({
-  //         title: "First task of 2nd project",
-  //         description: "First description",
-  //         dueDate: new Date().toLocaleDateString("en-CA"),
-  //         priority: "Priority 4"
-  //       }),
-  //       TodoFactory ({
-  //         title: "2nd task",
-  //         description: "Second description",
-  //         dueDate: new Date().toLocaleDateString("en-CA"),
-  //         priority: "Priority 4"
-  //       }),
-  //     ]
-  //   })
-  // );
 };
 
 // ------- DEFAULT INTI -----
@@ -85,7 +56,8 @@ function initLoader(projectItemIndex) {
 
 // Loading the product page
 function projectsLoader(projectItemIndex) {
-  ListOfProjects(defaultUser);
+  // ListOfProjects(defaultUser);
+  AddProjectModal(defaultUser);
   // SidebarProjects(defaultUser, projectItemIndex);
   // attachEventListeners();
 }
