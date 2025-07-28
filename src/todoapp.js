@@ -358,10 +358,11 @@ export function attachEventListeners() {
     let formTaskProjectIndex;
 
     if (formTaskName.value.length > 0) {
-      if (taskSubmitButton.textContent === addText) {
-        formTaskProjectIndex = defaultUser.projects.findIndex(item => 
+      // Get index of selected project in form
+      formTaskProjectIndex = defaultUser.projects.findIndex(item => 
                                       item.name === formTaskProject.value);
 
+      if (taskSubmitButton.textContent === addText) {
         defaultUser.projects[formTaskProjectIndex].addTodo(
           TodoFactory ({
             title: formTaskName.value,
@@ -371,15 +372,27 @@ export function attachEventListeners() {
           })
         );
       } else if (taskSubmitButton.textContent === saveText) {
-        defaultUser.projects[activeProjectIndex].editTodo(
-          taskItemIndex,
-          TodoFactory ({
-            title: formTaskName.value,
-            description: formTaskDescription.value,
-            dueDate: formTaskDueDate.value,
-            priority: formTaskPriority.value
-          })
-        )
+          if (formTaskProject.value !== defaultUser.projects[activeProjectIndex].name) {
+            defaultUser.projects[activeProjectIndex].deleteTodo(taskItemIndex);
+            defaultUser.projects[formTaskProjectIndex].addTodo(
+              TodoFactory ({
+                title: formTaskName.value,
+                description: formTaskDescription.value,
+                dueDate: formTaskDueDate.value,
+                priority: formTaskPriority.value
+              })
+            )
+          } else {
+            defaultUser.projects[activeProjectIndex].editTodo(
+              taskItemIndex,
+              TodoFactory ({
+                title: formTaskName.value,
+                description: formTaskDescription.value,
+                dueDate: formTaskDueDate.value,
+                priority: formTaskPriority.value
+              })
+            )
+          }
       }
       // Reload updated DOM and event listeners 
       clearModalTextContents();
