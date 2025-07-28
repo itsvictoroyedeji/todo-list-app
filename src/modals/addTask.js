@@ -270,14 +270,12 @@ export default function addTaskModal(user, projectIndex) {
     const projectOption = document.createElement("option");
     projectOption.value = userProjects[i].name;
     // Pre-select current project in list
-    if (projectOption.value === userProjects[i].name) {
+    if (projectOption.value === userProjects[projectIndex].name) {
       projectOption.selected = true;
     };
     projectOption.appendChild(document.createTextNode(userProjects[i].name));
     taskProjectSelect.appendChild(projectOption);
   }
-
-
 
   taskProject.appendChild(taskProjectSelect);
 

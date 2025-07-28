@@ -235,7 +235,6 @@ export function attachEventListeners() {
         // Reload updated DOM and event listeners with current index
         initLoader(activeProjectIndex);
       }
-      
 
     } else {
       window.alert("Task name is required");
@@ -270,7 +269,6 @@ export function attachEventListeners() {
       taskDialog.showModal();
       taskDialogHeader.textContent = editTaskHeaderText;
       taskItemIndex = e.target.closest("li").dataset.index;
-      // const projectItem = document.querySelector(`.project-item[data-index="${taskItemIndex}"]`);
       taskItem = defaultUser.projects[activeProjectIndex].getTodos[taskItemIndex];
       formTaskName.value = taskItem.title;
       formTaskDescription.value = taskItem.description;
@@ -325,11 +323,14 @@ export function attachEventListeners() {
   function taskSubmit(e) {
     e.preventDefault();
 
+    let formTaskProjectIndex;
+
     if (formTaskName.value.length > 0) {
       if (taskSubmitButton.textContent === addText) {
-        
+        formTaskProjectIndex = defaultUser.projects.findIndex(item => 
+                                      item.name === formTaskProject.value);
 
-        defaultUser.projects[activeProjectIndex].addTodo(
+        defaultUser.projects[formTaskProjectIndex].addTodo(
           TodoFactory ({
             title: formTaskName.value,
             description: formTaskDescription.value,
@@ -350,7 +351,7 @@ export function attachEventListeners() {
       }
       // Reload updated DOM and event listeners 
       clearModalTextContents();
-      initLoader(activeProjectIndex);
+      initLoader(formTaskProjectIndex);
     } else {
       window.alert("Task name is required");
       return false;
