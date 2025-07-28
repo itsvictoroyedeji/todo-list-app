@@ -1,12 +1,14 @@
 import "./styles.css";
 import { greeting } from "./greetings"; // remove this line and src/greetings.js file
 import ProjectTasks from "./pages/projectTasks";
+import ListOfProjects from "./pages/listOfProjects";
 import AddTaskModal from "./modals/addTask";
 import User from "./modules/user";
 import Project from "./modules/project";
 import TodoFactory from "./modules/todo-factory";
 import SidebarProjects from "./pages/sidebarProjects";
 import AddProjectModal from "./modals/addProject";
+
 
 document.addEventListener('DOMContentLoaded',() => {
   const initialProjectIndex = 0;
@@ -81,10 +83,20 @@ function initLoader(projectItemIndex) {
   console.log(defaultUser);
 };
 
+// Loading the product page
+function projectsLoader(projectItemIndex) {
+  ListOfProjects(defaultUser);
+  // SidebarProjects(defaultUser, projectItemIndex);
+  // attachEventListeners();
+}
+
 export function attachEventListeners() {
   // Change sidebar's title
   const sidebarTitle = document.querySelector(".sidebar-username span");
   sidebarTitle.textContent = `${defaultUser.name}'s Tasks`;
+
+  // Project Page event listeners
+  const myProjectsBreadcrumb = document.querySelector(".my-projects-breadcrumb");
 
   // Add Project form event listeners
   const sidebarAddProjectButton = document.querySelector(".sidebar-projects-add button");
@@ -130,6 +142,22 @@ export function attachEventListeners() {
       taskDialog.textContent = '';
   }
 
+  // Get Active project + Get Active project index selector
+  const activeProject = document.querySelector(".sidebar-project-list-item.sidebar-active");
+
+  let activeProjectIndex;
+  if (defaultUser.projects.length > 0 ) {
+    activeProjectIndex = activeProject.dataset.index;
+  }
+
+
+  // -------------- Projects page ----
+
+  myProjectsBreadcrumb.addEventListener("click", (e) => {
+    clearModalTextContents();
+    projectsLoader(activeProjectIndex);
+  })
+
   // -------------- Projects =======
 
   function clearProjectFormValues() {
@@ -148,13 +176,7 @@ export function attachEventListeners() {
     })
   });
 
-  // Get Active project + Get Active project index selector
-  const activeProject = document.querySelector(".sidebar-project-list-item.sidebar-active");
-
-  let activeProjectIndex;
-  if (defaultUser.projects.length > 0) {
-    activeProjectIndex = activeProject.dataset.index;
-  }
+  
 
   // Sidebar's "+ Add Task" button
   if (defaultUser.projects.length == 0) {
