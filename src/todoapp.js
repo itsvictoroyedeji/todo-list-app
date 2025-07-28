@@ -218,26 +218,58 @@ export function attachEventListeners() {
   function projectSubmit(e) {
     e.preventDefault();
     if (formProjectName.value.length > 0) {
+      
+      let duplicate;
       if (projectSubmitButton.textContent === addText) {
-        defaultUser.addNewProject(
-          new Project({
-            name: formProjectName.value
-          })
-        );
-        // Reload updated DOM and event listeners with new index
-        newProjectIndex = defaultUser.projects.length - 1;
-        clearModalTextContents();
-        initLoader(newProjectIndex);
+        // Check if there's a duplicate project name
+        for (let i = 0; i < defaultUser.projects.length ; i++) {
+          if (defaultUser.projects[i].name === formProjectName.value) {
+            window.alert("Duplicate project name. Please choose another one.");
+            duplicate = true
+            break;
+          } else {
+            duplicate = false;
+          }
+        };
+        if (duplicate) {
+          return false;
+        } else {
+          defaultUser.addNewProject(
+            new Project({
+              name: formProjectName.value
+            })
+          );
+          // Reload updated DOM and event listeners with new index
+          newProjectIndex = defaultUser.projects.length - 1;
+          clearModalTextContents();
+          initLoader(newProjectIndex);
+        }
        
       } else if (projectSubmitButton.textContent === saveText) {
-        defaultUser.projects[activeProjectIndex].name = formProjectName.value;
-        clearModalTextContents();
-        // Reload updated DOM and event listeners with current index
-        initLoader(activeProjectIndex);
+        // Check if there's a duplicate project name
+        for (let i = 0; i < defaultUser.projects.length ; i++) {
+          if (defaultUser.projects[i].name === formProjectName.value) {
+            duplicate = true
+            break;
+          } else {
+            duplicate = false;
+          }
+        };
+        if (duplicate) {
+          if (defaultUser.projects[activeProjectIndex].name !== formProjectName.value) {
+            window.alert("Another project has this name. Please choose another one.");
+            return false;
+          }
+        } else {
+          defaultUser.projects[activeProjectIndex].name = formProjectName.value;
+          clearModalTextContents();
+          // Reload updated DOM and event listeners with current index
+          initLoader(activeProjectIndex);
+        }
       }
 
     } else {
-      window.alert("Task name is required");
+      window.alert("Project name is required");
       return false;
     };
     projectDialog.close();
