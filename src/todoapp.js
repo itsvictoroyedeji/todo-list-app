@@ -67,7 +67,7 @@ function initLoader(projectItemIndex) {
     SidebarProjects(defaultUser, projectItemIndex);
     ProjectTasks(defaultUser, projectItemIndex);
     AddProjectModal(defaultUser);
-    AddTaskModal(defaultUser);
+    AddTaskModal(defaultUser, projectItemIndex);
     attachEventListeners();
   } else {
     mainDialog.textContent = "";
@@ -111,6 +111,7 @@ export function attachEventListeners() {
   const formTaskDescription = document.querySelector('#task-description');
   const formTaskDueDate = document.querySelector('#task-date');
   const formTaskPriority = document.querySelector('#task-priority');
+  const formTaskProject = document.querySelector('#task-project');
 
   // Form text defaults
   const addText = "Add";
@@ -326,6 +327,8 @@ export function attachEventListeners() {
 
     if (formTaskName.value.length > 0) {
       if (taskSubmitButton.textContent === addText) {
+        
+
         defaultUser.projects[activeProjectIndex].addTodo(
           TodoFactory ({
             title: formTaskName.value,

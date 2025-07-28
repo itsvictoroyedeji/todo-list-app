@@ -1,4 +1,4 @@
-export default function addTaskModal(user) {
+export default function addTaskModal(user, projectIndex) {
 
   // Get Root dialog element
   const mainDialog = document.querySelector("#addTaskDialog");
@@ -269,9 +269,15 @@ export default function addTaskModal(user) {
   for (let i = 0 ; i < userProjects.length ; i++) {
     const projectOption = document.createElement("option");
     projectOption.value = userProjects[i].name;
+    // Pre-select current project in list
+    if (projectOption.value === userProjects[i].name) {
+      projectOption.selected = true;
+    };
     projectOption.appendChild(document.createTextNode(userProjects[i].name));
     taskProjectSelect.appendChild(projectOption);
   }
+
+
 
   taskProject.appendChild(taskProjectSelect);
 
