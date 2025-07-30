@@ -133,6 +133,7 @@ body {
   --task-list-item-padding-y: 8px;
   --task-action-buttons-right-shift: 30px;
   --modal-padding-top: 13vh;
+  --editor-max-width: 800px;
 }
 
 #todolist_app {
@@ -1160,4 +1161,217 @@ h1.form-header-text {
 
 .form footer .submit-button:hover {
   background-color: var(--darker-red);
+}
+
+/* Projects page CSS */
+
+.project-page-list-header-container {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 56px, 63px;
+  padding-left: var(--main-container-side-padding);
+  padding-right: var(--main-container-side-padding);
+  padding-top: var(--main-spacing-small);
+}
+
+.projects-page-list-blank-space {
+  max-width: var(--editor-max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding-top: var(--main-spacing-xxlarge);
+  padding-bottom: var(--main-spacing-xsmall);
+}
+
+.projects-page-list-header {
+  margin-top: var(--main-spacing-medium);
+   margin-bottom: var(--main-spacing-large);
+  border-bottom: 1px solid #eee;
+  max-width: var(--editor-max-width);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.projects-page-list-header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.projects-page-list-counter {
+  display: flex;
+  min-width: 0;
+  flex-basis: auto;
+  flex-grow: 1;
+  height: calc(var(--button-height) + 10px);
+  align-items: center;
+}
+
+.projects-list-counter-text {
+  font-weight: var(--font-weight-medium);
+  font-size: 0.9rem;
+}
+
+.project-page-add-project-button-container {
+  display: flex;
+  margin-left: var(--main-spacing-medium);
+  /* margin-right: var(--main-spacing-medium); */
+}
+
+.add-project-button {
+  min-width: 60px;
+  background-color: var(--sidebar-item-hover);
+  height: var(--button-height);
+  font-size: var(--button-font-size);
+  min-height: 1.9em;
+  border: var(--sidebar-item-hover);
+  padding: 0 0.8em;
+  color: rgb(72, 72, 72);
+  font-size: 0.85rem;
+}
+
+.add-project-button:hover {
+  background-color: var(--sidebar-item-darker-hover);
+}
+
+.project-page-list-of-projects-container {
+  padding-left: var(--main-container-side-padding);
+  padding-right: var(--main-container-side-padding);
+  padding-top: var(--main-spacing-medium);
+}
+
+.project-page-list-of-projects-container * {
+  scroll-margin-top: calc(var(--main-view-header-height) + var(--main-spacing-xsmall));
+}
+
+.project-page-projects-ul {
+  max-width: var(--editor-max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.project-page-project-li {
+  padding-left: 0;
+  scroll-margin-top: calc(var(calc(56px + 0) + var(--main-spacing-xsmall)));
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.project-page-project-flex {
+  min-width: 0;
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  border-radius: 10px;
+  padding-right: (var(--main-spacing-medium));
+}
+
+.project-page-project-item {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding: var(--main-spacing-medium);
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+@media (max-width: 992px) {
+  .project-page-project-item  {
+      min-width: 175px;
+  }
+}
+
+.project-page-project-item-div {
+  scroll-margin-top: calc(var(--main-view-header-height) + var(--main-spacing-xsmall));
+  gap: var(--main-spacing-xsmall);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .project-page-project-item-text  {
+      min-width: 250px;
+  }
+}
+.project-page-project-item-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--main-spacing-xsmall);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: var(--main-spacing-xsmall);
+  font-weight: normal;
+}
+
+.project-page-list-actions-container {
+  min-width: 24px;
+  /* max-width: 24px; */
+  margin-right: 5px;
+  margin-left: var(--main-spacing-medium);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.project-page-list-actions-container button {
+  /* opacity: 0; */
+}
+
+.project-page-project-li:hover .project-page-list-actions-container button {
+  opacity: 1;
+}
+
+.project-page-list-actions-container>button, .project-page-list-actions-container a {
+  color: var(--text-secondary-color);
+  font-size: calc(var(--button-font-size) - 2px);
+  cursor: pointer;
+  height: 24px;
+  margin-left: var(--main-spacing-xsmall);
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-duration: .1s; /* Faster transition */
+} 
+
+.project-page-list-delete-button {
+  color: var(--lighter-red) !important;
+}
+
+.project-page-project-flex:hover {
+  background: rgba(0, 0, 0, .04);
+}
+
+.project-page-project-flex:hover:not(:focus-visible):before {
+  content: "";
+  background: #fff;
+  width: 100%;
+  height: 1px;
+  display: block;
+  position: absolute;
+  top: -1px;
+  left: 0;
+}
+
+.project-page-project-flex:hover:not(:focus-visible):after {
+  top: auto;
+  bottom: -1px;
+  content: "";
+  background: #fff;
+  width: 100%;
+  height: 1px;
+  display: block;
+  position: absolute;
+  left: 0;
+}
+
+.project-page-list-actions-container > button:hover {
+  color: var(--main-button-hover-text);
+  background-color: var(--main-button-hover-background);
 }
