@@ -12,7 +12,7 @@ import AddProjectModal from "./modals/addProject";
 
 document.addEventListener('DOMContentLoaded',() => {
   const initialProjectIndex = 0;
-  // initLoader(initialProjectIndex);
+  projectsLoader(initialProjectIndex);
 });
 
 // GLOBAL initializations 
@@ -56,7 +56,9 @@ function initLoader(projectItemIndex) {
 
 // Loading the product page
 function projectsLoader(projectItemIndex) {
-  // ListOfProjects(defaultUser);
+  console.log(defaultUser);
+  
+  ListOfProjects(defaultUser);
   AddProjectModal(defaultUser);
   // SidebarProjects(defaultUser, projectItemIndex);
   // attachEventListeners();

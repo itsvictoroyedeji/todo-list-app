@@ -1285,7 +1285,7 @@ h1.form-header-text {
 
 .project-page-project-item-div {
   scroll-margin-top: calc(var(--main-view-header-height) + var(--main-spacing-xsmall));
-  gap: var(--main-spacing-xsmall);
+  /* gap: var(--main-spacing-xsmall); */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1320,7 +1320,7 @@ h1.form-header-text {
 }
 
 .project-page-list-actions-container button {
-  /* opacity: 0; */
+  opacity: 0;
 }
 
 .project-page-project-li:hover .project-page-list-actions-container button {
