@@ -20,7 +20,7 @@ let defaultUser;
 let projectItemIndex;
 let newProjectIndex;
 const mainContent = document.querySelector("#content");
-const sidebarProjectsList = document.querySelector("#sidebar-projects-list");
+let sidebarProjectsList;
 
 // Initialize default user name and project if empty
 if (defaultUser === undefined) {
@@ -42,6 +42,7 @@ function initLoader(projectItemIndex) {
     AddProjectModal(defaultUser);
     AddTaskModal(defaultUser, projectItemIndex);
     attachEventListeners();
+
   } else {
     mainContent.textContent = "";
     // sidebarProjectsList.textContent = "";
@@ -51,6 +52,7 @@ function initLoader(projectItemIndex) {
     AddTaskModal(defaultUser);
     attachEventListeners();
   }
+  
   console.log(defaultUser);
 };
 
@@ -58,9 +60,6 @@ export function attachEventListeners() {
   // Change sidebar's title
   const sidebarTitle = document.querySelector(".sidebar-username span");
   sidebarTitle.textContent = `${defaultUser.name}'s Tasks`;
-
-  // Project Page event listeners
-  const myProjectsBreadcrumb = document.querySelector(".my-projects-breadcrumb");
 
   // Add Project form event listeners
   const sidebarAddProjectButton = document.querySelector(".sidebar-projects-add button");
@@ -118,11 +117,80 @@ export function attachEventListeners() {
   // -------------- Projects page ----
 
   // Show projects page when "My Projects" breadcrumb is clicked
-  myProjectsBreadcrumb.addEventListener("click", (e) => {
-    console.log(e);
+  if (defaultUser.projects.length > 0) {
+    const myProjectsBreadcrumb = document.querySelector(".my-projects-breadcrumb");
+    myProjectsBreadcrumb.addEventListener("click", projectPageEventListeners);
+  }
+
+  function projectPageEventListeners() {
     mainContent.textContent = '';
     ListOfProjects(defaultUser);
-  })
+
+    // Remove highlight on sidebar
+    const sidebarProjectsListItems = document.getElementsByClassName("sidebar-project-list-item");
+
+    Array.from(sidebarProjectsListItems).forEach(project => {
+      project.classList.remove("sidebar-active");
+    });
+
+    // Project Page items declarations
+    const projectPageItem = document.getElementsByClassName("project-page-project-item");
+    const projectPageEditButton = document.getElementsByClassName('project-page-list-edit-button');
+    const projectPageDeleteButton = document.getElementsByClassName('project-page-list-delete-button');
+    const projectPageAddProjectButton = document.querySelector(".add-project-button");
+    console.log(projectPageAddProjectButton);
+   
+
+    if (defaultUser.projects.length > 0) {
+
+      // Clicks to correct project page
+      Array.from(projectPageItem).forEach(project => {
+        project.addEventListener("click", (e) => {
+          mainContent.textContent = '';
+          clearModalTextContents();
+          initLoader(e.target.closest("li").dataset.index);
+        })
+      });
+
+      // Project Page Edit Project button
+      Array.from(projectPageEditButton).forEach(project => {
+        project.addEventListener("click", (e) => {
+          const selectedProjectIndex = e.target.closest("li").dataset.index;
+
+          projectDialog.showModal();
+          projectDialogHeader.textContent = editProjectHeaderText;
+          projectSubmitButton.textContent = saveText;
+
+          // Prefill Form Fields
+          projectItem = defaultUser.projects[selectedProjectIndex];
+          formProjectName.value = projectItem.name;
+        })
+      });
+
+      // Project Page Delete Project button
+      Array.from(projectPageDeleteButton).forEach(project => {
+        project.addEventListener("click", (e) => {
+          const selectedProjectIndex = e.target.closest("li").dataset.index;
+          sidebarProjectsList = document.querySelector(".sidebar-projects-list")
+
+          if (confirm(`The "${defaultUser.projects[selectedProjectIndex].name}" project and all of its tasks will be permanently deleted.`)) {
+            defaultUser.deleteProject(selectedProjectIndex);
+            // Reload DOM
+            clearModalTextContents();
+            mainContent.textContent = "";
+            initLoader(0);
+          }
+        })
+      });
+    };
+
+    // Product page's +Add Project button
+    projectPageAddProjectButton.addEventListener("click", () => {
+      projectDialog.showModal();
+      projectDialogHeader.textContent = addProjectHeaderText;
+      projectSubmitButton.textContent = addText;
+    });
+  }
 
   // -------------- Projects =======
 
@@ -141,8 +209,6 @@ export function attachEventListeners() {
       initLoader(projectItemIndex);
     })
   });
-
-  
 
   // Sidebar's "+ Add Task" button
   if (defaultUser.projects.length == 0) {
@@ -164,26 +230,26 @@ export function attachEventListeners() {
   });
 
   if (defaultUser.projects.length > 0) {
-  // Edit Project Button
-  editProjectButton.addEventListener("click", () => {
-    projectDialog.showModal();
-    projectDialogHeader.textContent = editProjectHeaderText;
-    projectSubmitButton.textContent = saveText;
+    // Edit Project Button
+    editProjectButton.addEventListener("click", () => {
+      projectDialog.showModal();
+      projectDialogHeader.textContent = editProjectHeaderText;
+      projectSubmitButton.textContent = saveText;
 
-    // Prefill Form Fields
-    projectItem = defaultUser.projects[activeProjectIndex];
-    formProjectName.value = projectItem.name;
-  });
+      // Prefill Form Fields
+      projectItem = defaultUser.projects[activeProjectIndex];
+      formProjectName.value = projectItem.name;
+    });
 
-  // Delete Project Button
-  deleteProjectButton.addEventListener("click", (e) => {
-    if (confirm(`The "${defaultUser.projects[activeProjectIndex].name}" project and all of its tasks will be permanently deleted.`)) {
-      defaultUser.deleteProject(activeProjectIndex);
-      // Reload DOM
-      clearModalTextContents();
-      initLoader(0);
-    }
-  });
+    // Delete Project Button
+    deleteProjectButton.addEventListener("click", (e) => {
+      if (confirm(`The "${defaultUser.projects[activeProjectIndex].name}" project and all of its tasks will be permanently deleted.`)) {
+        defaultUser.deleteProject(activeProjectIndex);
+        // Reload DOM
+        clearModalTextContents();
+        initLoader(0);
+      }
+    });
   }
 
   // Project Form Cancel (x) button
