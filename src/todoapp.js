@@ -73,6 +73,7 @@ export function attachEventListeners() {
 
   // Add Task form event listeners
   const sidebarAddTaskButton = document.querySelector(".sidebar-add-task button");
+  const taskItemContent = document.getElementsByClassName("task-item-content");
   const addTaskButton = document.querySelector('.add-task-button');
   const editTaskButton = document.getElementsByClassName('task-list-edit-button');
   const deleteTaskButton = document.getElementsByClassName('task-list-delete-button');
@@ -194,7 +195,7 @@ export function attachEventListeners() {
     });
   }
 
-  // -------------- Projects =======
+  // -------------- Project =======
 
   function clearProjectFormValues() {
     formProjectName.value = "";
@@ -352,31 +353,38 @@ export function attachEventListeners() {
     );
   }
 
+  // Edit Task popup dialog when task is clicked
+  Array.from(taskItemContent).forEach(task => 
+    task.addEventListener("click", editTaskFunction
+  ));
+
   // Edit Task button to popup dialog
   Array.from(editTaskButton).forEach((button) => 
-    button.addEventListener("click", (e) => {
-      taskDialog.showModal();
-      taskDialogHeader.textContent = editTaskHeaderText;
-      taskItemIndex = e.target.closest("li").dataset.index;
-      taskItem = defaultUser.projects[activeProjectIndex].getTodos[taskItemIndex];
-      formTaskName.value = taskItem.title;
-      formTaskDescription.value = taskItem.description;
-      formTaskDueDate.value = taskItem.dueDate;
-      formTaskPriority.value = taskItem.priority;
-
-      if (formTaskPriority.value === "Priority 1") {
-        formTaskPriority.style.borderColor = "red";
-      } else if (formTaskPriority.value === "Priority 2") {
-        formTaskPriority.style.borderColor = "green";
-      } else if (formTaskPriority.value === "Priority 3") {
-        formTaskPriority.style.borderColor = "blue";
-      } else if (formTaskPriority.value === "Priority 4") {
-        formTaskPriority.style.borderColor = "#e6e6e6";
-      }
-      // Change submit button
-      taskSubmitButton.textContent = saveText;
-    }
+    button.addEventListener("click", editTaskFunction
   ));
+
+  function editTaskFunction(e) {
+    taskDialog.showModal();
+    taskDialogHeader.textContent = editTaskHeaderText;
+    taskItemIndex = e.target.closest("li").dataset.index;
+    taskItem = defaultUser.projects[activeProjectIndex].getTodos[taskItemIndex];
+    formTaskName.value = taskItem.title;
+    formTaskDescription.value = taskItem.description;
+    formTaskDueDate.value = taskItem.dueDate;
+    formTaskPriority.value = taskItem.priority;
+
+    if (formTaskPriority.value === "Priority 1") {
+      formTaskPriority.style.borderColor = "red";
+    } else if (formTaskPriority.value === "Priority 2") {
+      formTaskPriority.style.borderColor = "green";
+    } else if (formTaskPriority.value === "Priority 3") {
+      formTaskPriority.style.borderColor = "blue";
+    } else if (formTaskPriority.value === "Priority 4") {
+      formTaskPriority.style.borderColor = "#e6e6e6";
+    }
+    // Change submit button
+    taskSubmitButton.textContent = saveText;
+  };
 
   // Delete Task button confirm
   Array.from(deleteTaskButton).forEach((button) => 
