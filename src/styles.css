@@ -1382,3 +1382,21 @@ h1.form-header-text {
   color: var(--main-button-hover-text);
   background-color: var(--main-button-hover-background);
 }
+
+@media screen and (max-width: 46.875em) {
+  .app-sidebar-container {
+    margin-left: calc(-1 * 280px);
+    transition: margin-left .3s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    position: relative;
+  }
+
+  .project-item .task-list-actions-container button,
+  .project-page-list-actions-container>button {
+    opacity: 0.8;
+  }
+
+  .edit-project-button, .delete-project-button {
+    font-size: calc(var(--button-font-size) - 2px);
+  }
+}
