@@ -20,7 +20,6 @@ let defaultUser;
 let projectItemIndex;
 let newProjectIndex;
 const mainContent = document.querySelector("#content");
-let sidebarProjectsList;
 
 // Initialize default user name and project if empty
 if (defaultUser === undefined) {
@@ -116,6 +115,10 @@ export function attachEventListeners() {
 
   // -------------- Projects page ----
 
+  // "My projects" on sidebar goes to projects page
+  const sidebarMyProjectsButton = document.querySelector(".sidebar-projects-list-header-flexbox > a");
+  sidebarMyProjectsButton.addEventListener("click", projectPageEventListeners);
+
   // Show projects page when "My Projects" breadcrumb is clicked
   if (defaultUser.projects.length > 0) {
     const myProjectsBreadcrumb = document.querySelector(".my-projects-breadcrumb");
@@ -126,7 +129,7 @@ export function attachEventListeners() {
     mainContent.textContent = '';
     ListOfProjects(defaultUser);
 
-    // Remove highlight on sidebar
+    // Remove highlight on sidebar's projects
     const sidebarProjectsListItems = document.getElementsByClassName("sidebar-project-list-item");
 
     Array.from(sidebarProjectsListItems).forEach(project => {
@@ -171,7 +174,6 @@ export function attachEventListeners() {
       Array.from(projectPageDeleteButton).forEach(project => {
         project.addEventListener("click", (e) => {
           const selectedProjectIndex = e.target.closest("li").dataset.index;
-          sidebarProjectsList = document.querySelector(".sidebar-projects-list")
 
           if (confirm(`The "${defaultUser.projects[selectedProjectIndex].name}" project and all of its tasks will be permanently deleted.`)) {
             defaultUser.deleteProject(selectedProjectIndex);
