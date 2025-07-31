@@ -36,6 +36,7 @@ if (defaultUser === undefined) {
 
 function initLoader(projectItemIndex) {
   if (defaultUser.projects.length > 0) {
+    mainContent.classList.remove("no-projects");
     SidebarProjects(defaultUser, projectItemIndex);
     ProjectTasks(defaultUser, projectItemIndex);
     AddProjectModal(defaultUser);
@@ -44,11 +45,19 @@ function initLoader(projectItemIndex) {
 
   } else {
     mainContent.textContent = "";
-    // sidebarProjectsList.textContent = "";
     SidebarProjects(defaultUser, projectItemIndex);
     ProjectTasks(defaultUser, projectItemIndex);
     AddProjectModal(defaultUser);
     AddTaskModal(defaultUser);
+    
+    // Show +Add Projects button on main page if no projects
+    mainContent.classList.add("no-projects");
+    const addProjectButton = document.createElement("button");
+    addProjectButton.setAttribute("type", "button");
+    addProjectButton.classList.add("add-project-button", "buttonish-elem");
+    addProjectButton.appendChild(document.createTextNode('+ Add New Project')); // + Add Project button
+    mainContent.appendChild(addProjectButton);
+
     attachEventListeners();
   }
   
@@ -62,6 +71,9 @@ export function attachEventListeners() {
 
   // Add Project form event listeners
   const sidebarAddProjectButton = document.querySelector(".sidebar-projects-add button");
+  const emptyProjectPageAddProjectButton = document.querySelector("#content.no-projects button");
+  console.log(emptyProjectPageAddProjectButton);
+  
   const editProjectButton = document.querySelector('.edit-project-button');
   const deleteProjectButton = document.querySelector('.delete-project-button');
   const projectDialog = document.querySelector('#addProjectDialog');
@@ -149,7 +161,6 @@ export function attachEventListeners() {
     const projectPageEditButton = document.getElementsByClassName('project-page-list-edit-button');
     const projectPageDeleteButton = document.getElementsByClassName('project-page-list-delete-button');
     const projectPageAddProjectButton = document.querySelector(".add-project-button");
-    console.log(projectPageAddProjectButton);
    
 
     if (defaultUser.projects.length > 0) {
@@ -223,7 +234,6 @@ export function attachEventListeners() {
   // Sidebar's "+ Add Task" button
   if (defaultUser.projects.length == 0) {
     sidebarAddTaskButton.disabled = true;
-    console.dir(sidebarAddTaskButton)
   } else {
     sidebarAddTaskButton.disabled = false;
     sidebarAddTaskButton.addEventListener("click", () => {
@@ -238,6 +248,15 @@ export function attachEventListeners() {
     projectDialogHeader.textContent = addProjectHeaderText;
     projectSubmitButton.textContent = addText;
   });
+
+  // + Add Project button if there are no projects
+  if (defaultUser.projects.length === 0) {
+    emptyProjectPageAddProjectButton.addEventListener("click", () => {
+      projectDialog.showModal();
+      projectDialogHeader.textContent = addProjectHeaderText;
+      projectSubmitButton.textContent = addText;
+    });
+  }
 
   if (defaultUser.projects.length > 0) {
     // Edit Project Button

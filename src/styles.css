@@ -311,7 +311,6 @@ body {
 }
 
 
-
 /* All links */
 a {
   color: var(--link-color);
@@ -453,6 +452,12 @@ a {
   overflow-x: hidden;
   overflow-y: auto;
   transition: opacity .25s cubic-bezier(.4,0,.6,1);
+}
+
+#content.no-projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-container > main {
