@@ -118,9 +118,16 @@ export function attachEventListeners() {
 
   // "My projects" on sidebar goes to projects page
   const sidebarMyProjectsButton = document.querySelector(".sidebar-projects-list-header-flexbox > a");
-  sidebarMyProjectsButton.addEventListener("click", projectPageEventListeners);
 
-  // Show projects page when "My Projects" breadcrumb is clicked
+  if (defaultUser.projects.length == 0) {
+    sidebarMyProjectsButton.style.pointerEvents = "none";
+  } else {
+    sidebarMyProjectsButton.style.pointerEvents = "initial";
+    sidebarMyProjectsButton.disabled = false;
+    sidebarMyProjectsButton.addEventListener("click", projectPageEventListeners);
+  }
+
+  // Show projects page when "My Projects" breadcrumb on top is clicked
   if (defaultUser.projects.length > 0) {
     const myProjectsBreadcrumb = document.querySelector(".my-projects-breadcrumb");
     myProjectsBreadcrumb.addEventListener("click", projectPageEventListeners);
