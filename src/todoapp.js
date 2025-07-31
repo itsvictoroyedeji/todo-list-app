@@ -12,14 +12,14 @@ import AddProjectModal from "./modals/addProject";
 
 document.addEventListener('DOMContentLoaded',() => {
   const initialProjectIndex = 0;
-  projectsLoader(initialProjectIndex);
+  initLoader(initialProjectIndex);
 });
 
 // GLOBAL initializations 
 let defaultUser;
 let projectItemIndex;
 let newProjectIndex;
-const mainDialog = document.querySelector("#content");
+const mainContent = document.querySelector("#content");
 const sidebarProjectsList = document.querySelector("#sidebar-projects-list");
 
 // Initialize default user name and project if empty
@@ -43,7 +43,7 @@ function initLoader(projectItemIndex) {
     AddTaskModal(defaultUser, projectItemIndex);
     attachEventListeners();
   } else {
-    mainDialog.textContent = "";
+    mainContent.textContent = "";
     // sidebarProjectsList.textContent = "";
     SidebarProjects(defaultUser, projectItemIndex);
     ProjectTasks(defaultUser, projectItemIndex);
@@ -53,16 +53,6 @@ function initLoader(projectItemIndex) {
   }
   console.log(defaultUser);
 };
-
-// Loading the product page
-function projectsLoader(projectItemIndex) {
-  console.log(defaultUser);
-  
-  ListOfProjects(defaultUser);
-  AddProjectModal(defaultUser);
-  // SidebarProjects(defaultUser, projectItemIndex);
-  // attachEventListeners();
-}
 
 export function attachEventListeners() {
   // Change sidebar's title
@@ -127,9 +117,11 @@ export function attachEventListeners() {
 
   // -------------- Projects page ----
 
+  // Show projects page when "My Projects" breadcrumb is clicked
   myProjectsBreadcrumb.addEventListener("click", (e) => {
-    clearModalTextContents();
-    projectsLoader(activeProjectIndex);
+    console.log(e);
+    mainContent.textContent = '';
+    ListOfProjects(defaultUser);
   })
 
   // -------------- Projects =======
