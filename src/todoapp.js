@@ -9,6 +9,10 @@ import TodoFactory from "./modules/todo-factory";
 import SidebarProjects from "./pages/sidebarProjects";
 import AddProjectModal from "./modals/addProject";
 
+// No zoom on double-click of buttons
+document.addEventListener('dblclick', function(e) {
+  e.preventDefault();
+});
 
 document.addEventListener('DOMContentLoaded',() => {
   const initialProjectIndex = 0;
