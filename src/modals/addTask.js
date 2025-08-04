@@ -162,13 +162,11 @@ export default function addTaskModal(user, projectIndex) {
   taskDatePicker.type = "date";
   taskDatePicker.id = "task-date";
   taskDatePicker.name = "date";
-  // const todaysDate = new Date();
-  // taskDatePicker.value = todaysDate.toLocaleDateString();
-  taskDatePicker.min = "2023/01/01";
-  taskDatePicker.max = "2026/12/31";
+  taskDatePicker.min = new Date().toLocaleDateString('en-CA');
   taskDatePicker.autofocus = true;
   taskDate.appendChild(taskDatePicker);
 
+  console.dir(taskDatePicker);
   //         </div>
   //         <div class="form-row task-form-priority">
   const taskPriority = document.createElement("div");

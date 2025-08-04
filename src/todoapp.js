@@ -9,14 +9,15 @@ import TodoFactory from "./modules/todo-factory";
 import SidebarProjects from "./pages/sidebarProjects";
 import AddProjectModal from "./modals/addProject";
 
-// No zoom on double-click of buttons
-document.addEventListener('dblclick', function(e) {
-  e.preventDefault();
-});
-
+// Add project tasks on page load
 document.addEventListener('DOMContentLoaded',() => {
   const initialProjectIndex = 0;
   initLoader(initialProjectIndex);
+});
+
+// No zoom on double-click of buttons
+document.addEventListener('dblclick', function(e) {
+  e.preventDefault();
 });
 
 // GLOBAL initializations 
@@ -76,7 +77,6 @@ export function attachEventListeners() {
   // Add Project form event listeners
   const sidebarAddProjectButton = document.querySelector(".sidebar-projects-add button");
   const emptyProjectPageAddProjectButton = document.querySelector("#content.no-projects button");
-  console.log(emptyProjectPageAddProjectButton);
   
   const editProjectButton = document.querySelector('.edit-project-button');
   const deleteProjectButton = document.querySelector('.delete-project-button');

@@ -1,3 +1,5 @@
+import { format, add } from "date-fns";
+
 // Shows Project Task page
 export default function ProjectTasks(user, projectIndex) {
   if (user.projects.length > 0) {
@@ -285,10 +287,20 @@ export default function ProjectTasks(user, projectIndex) {
     const dateSpan = document.createElement("span");
     dateSpan.classList.add("date");
 
-    if (tasks[i].dueDate === new Date().toLocaleDateString("en-CA")) {
+    if (tasks[i].dueDate === new Date().toLocaleDateString('en-CA')) {
       dateSpan.appendChild(document.createTextNode("Today"));
     } else {
-      dateSpan.appendChild(document.createTextNode(tasks[i].dueDate));
+      dateSpan.appendChild(
+        document.createTextNode(
+          format(
+            add(
+              tasks[i].dueDate, {
+                days: 1
+              }
+            ), 'MMM d ' // => 'Jan 10' format
+          )
+        )
+      );
     };
     
     dateIcon.appendChild(dateSpan);
