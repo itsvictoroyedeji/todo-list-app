@@ -943,12 +943,12 @@ a {
 }
 
 /* Add Task modal */
-#addTaskDialog[open],
+/* #addTaskDialog[open],
 #addProjectDialog[open] {
   position: fixed;
   inset: 0 0 0 0;
   margin: auto;
-}
+} */
 
 #addTaskDialog,
 #addProjectDialog {
@@ -968,16 +968,22 @@ a {
   outline: none !important;
 }
 
-
-
-/* @keyframes modal-dialog {
+@keyframes modal-dialog {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
-} */
+}
+
+@media screen and (max-width: 25em) {
+  #addTaskDialog,
+  #addProjectDialog {
+    width: 100%;
+  }
+}
+
 
 #addTaskDialog::backdrop,
 #addProjectDialog::backdrop {
