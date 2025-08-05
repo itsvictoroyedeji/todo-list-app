@@ -41,6 +41,7 @@ if(!localStorage.getItem("user")) {
 
 function populateStorage() {
   localStorage.setItem('user', JSON.stringify(defaultUser));
+  alert(`Hey there! Add your todo's here. Click the "+ Add Task" button to add your tasks.`)
   setDefaultUser();
 };
 
