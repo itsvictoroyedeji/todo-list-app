@@ -54,7 +54,7 @@ export default function ProjectTasks(user, projectIndex) {
 
   //                 <span>My Projects</span>
   const myProjectBreadcrumbSpan = document.createElement("span");
-  const projectsBreadcrumbText = "My List of Projects";
+  const projectsBreadcrumbText = "My Projects";
   myProjectBreadcrumbSpan.appendChild(document.createTextNode(projectsBreadcrumbText));
   myProjectBreadcrumb.appendChild(myProjectBreadcrumbSpan);
 
