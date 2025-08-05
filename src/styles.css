@@ -503,8 +503,8 @@ a {
   align-items: stretch;
   top: 0;
   border-bottom: 1px solid transparent;
-  padding-left: var(--main-spacing-medium);
-  padding-right: var(--main-spacing-medium);
+  padding-left: var(--main-spacing-xlarge);
+  padding-right: var(--main-spacing-xlarge);
   flex-shrink: 0;
   position: sticky;
   position: -webkit-sticky;
