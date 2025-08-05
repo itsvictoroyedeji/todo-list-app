@@ -771,7 +771,7 @@ a {
 
 @media screen and (max-width: 25em) {
   .task-item-content {
-    margin-right: 60px;
+    margin-right: 45px;
   }
 }
 
@@ -865,6 +865,12 @@ a {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+@media screen and (max-width: 25em) {
+  .task-list-actions-container {
+    margin-right: calc(-1 * 43px);
+  }
 }
 
 .project-item .task-list-actions-container button {
