@@ -110,7 +110,7 @@ export default function listOfProjects(user) {
     //                   <button type="button" class="add-project-button buttonish-elem" >
     const addProjectButton = document.createElement("button");
     addProjectButton.setAttribute("type", "button");
-    addProjectButton.classList.add("add-project-button", "buttonish-elem");
+    addProjectButton.classList.add("add-project-button", "project-page-add-button", "buttonish-elem");
     addProjectButton.appendChild(document.createTextNode(addProjectText)); // + Add Project button
     addProjectButtonContainer.appendChild(addProjectButton);
 

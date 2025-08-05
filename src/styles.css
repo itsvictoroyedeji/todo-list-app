@@ -1256,6 +1256,10 @@ h1.form-header-text {
   font-size: 0.95rem;
 }
 
+.project-page-add-button {
+  font-size: 0.75rem;
+}
+
 .add-project-button:hover {
   background-color: var(--sidebar-item-darker-hover);
 }
