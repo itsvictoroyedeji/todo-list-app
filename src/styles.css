@@ -139,6 +139,7 @@ body {
 #todolist_app {
   display: flex;
   flex-direction: column;
+
 }
 
 #todolist_app, body, html {
@@ -152,6 +153,10 @@ body {
   height: 100%;
   width: 100%;
   overflow: hidden;
+}
+
+.entire-window-container * {
+  outline: none !important;
 }
 
 .app-sidebar-container {
