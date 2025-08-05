@@ -910,6 +910,12 @@ a {
   text-decoration: none;
 }
 
+@media screen and (max-width: 25em) {
+  .add-task-button {
+    font-size: 1rem;
+  }
+}
+
 .add-task-section button {
   transition: opacity .2s ease-in-out;
 }
@@ -1128,6 +1134,7 @@ h1.form-header-text {
   .form .form-row input,
   .form .form-row select {
     height: 36px;
+    font-size: 1rem;
   }
 }
 
