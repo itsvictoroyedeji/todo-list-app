@@ -508,31 +508,32 @@ export function attachEventListeners() {
         );
       // Edit Task dialog
       } else if (taskSubmitButton.textContent === saveText) {
-          // If a different 
-          if (formTaskProject.value !== defaultUser.projects[activeProjectIndex].name) {
-            defaultUser.projects[activeProjectIndex].deleteTodo(taskItemIndex);
-            defaultUser.projects[formTaskProjectIndex].addTodo(
-              TodoFactory ({
-                title: formTaskName.value,
-                description: formTaskDescription.value,
-                dueDate: formTaskDueDate.value,
-                priority: formTaskPriority.value
-              })
-            )
-          } else {
-            defaultUser.projects[activeProjectIndex].editTodo(
-              taskItemIndex,
-              TodoFactory ({
-                title: formTaskName.value,
-                description: formTaskDescription.value,
-                dueDate: formTaskDueDate.value,
-                priority: formTaskPriority.value
-              })
-            )
-          }
+        // If the "Project" value submitted is different from the current project
+        if (formTaskProject.value !== defaultUser.projects[activeProjectIndex].name) {
+          defaultUser.projects[activeProjectIndex].deleteTodo(taskItemIndex);
+          defaultUser.projects[formTaskProjectIndex].addTodo(
+            TodoFactory ({
+              title: formTaskName.value,
+              description: formTaskDescription.value,
+              dueDate: formTaskDueDate.value,
+              priority: formTaskPriority.value
+            })
+          )
+        } else {
+          defaultUser.projects[activeProjectIndex].editTodo(
+            taskItemIndex,
+            TodoFactory ({
+              title: formTaskName.value,
+              description: formTaskDescription.value,
+              dueDate: formTaskDueDate.value,
+              priority: formTaskPriority.value
+            })
+          )
+        }
       }
       // Reload updated DOM and event listeners 
       clearModalTextContents();
+      // populateStorage();
       initLoader(formTaskProjectIndex);
     } else {
       window.alert("Task name is required");
