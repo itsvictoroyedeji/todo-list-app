@@ -1448,7 +1448,7 @@ h1.form-header-text {
 @media screen and (max-width: 46.875em) {
   .app-sidebar-container {
     margin-left: calc(-1 * 280px);
-    /* transition: margin-left .3s cubic-bezier(.4,0,.2,1); */
+    transition: margin-left .2s cubic-bezier(.4,0,.2,1);
     display: flex;
     position: relative;
   }
