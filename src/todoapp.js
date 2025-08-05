@@ -26,17 +26,44 @@ let projectItemIndex;
 let newProjectIndex;
 const mainContent = document.querySelector("#content");
 
-// Initialize default user name and project if empty
-if (defaultUser === undefined) {
-  defaultUser = new User({
-    name: "Victor",
-    projects: [
-      new Project({})
-    ]
-  });
+// Initialize default user name and project
+defaultUser = {
+  name: "Victor",
+  projects: [
+    {
+      name: "Testing Project",
+      todos: []
+    }
+  ]
 };
 
-// ------- DEFAULT INTI -----
+if(!localStorage.getItem("user")) {
+  populateStorage();
+} else {
+  setDefaultUser();
+};
+
+function populateStorage() {
+  localStorage.setItem('user', JSON.stringify(defaultUser));
+  setDefaultUser();
+};
+
+function setDefaultUser() {
+  const userData = localStorage.getItem('user');
+  
+  if(userData) {
+    defaultUser = JSON.parse(userData);
+  } else {
+    console.log("User data not found in local storage");
+  }
+}
+
+
+// localStorage.clear();
+
+
+
+// ------- DEFAULT INIT LOADER -----
 // Display Default Project Task + Add Task Modal's HTML + Event Listeners
 
 function initLoader(projectItemIndex) {
@@ -469,6 +496,7 @@ export function attachEventListeners() {
       formTaskProjectIndex = defaultUser.projects.findIndex(item => 
                                       item.name === formTaskProject.value);
 
+      // Save task dialog
       if (taskSubmitButton.textContent === addText) {
         defaultUser.projects[formTaskProjectIndex].addTodo(
           TodoFactory ({
@@ -478,7 +506,9 @@ export function attachEventListeners() {
             priority: formTaskPriority.value
           })
         );
+      // Edit Task dialog
       } else if (taskSubmitButton.textContent === saveText) {
+          // If a different 
           if (formTaskProject.value !== defaultUser.projects[activeProjectIndex].name) {
             defaultUser.projects[activeProjectIndex].deleteTodo(taskItemIndex);
             defaultUser.projects[formTaskProjectIndex].addTodo(
