@@ -1121,7 +1121,7 @@ h1.form-header-text {
   background: 0 0;
   font-size: var(--font-size-body);
   line-height: calc(var(--font-size-body) + 7px);
-
+  color: var(--content-primary);
 }
 
 .form .form-row select {
