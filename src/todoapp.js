@@ -29,7 +29,6 @@ const mainContent = document.querySelector("#content");
 
 // Initialize default user name and project
 defaultUser = new User({
-  name: "Victor",
   projects: [
     new Project({})
   ]
@@ -66,6 +65,8 @@ function setDefaultUser() {
   }
   console.log("local storage:", defaultUser);
 }
+
+// localStorage.clear();
 
 // ------- DEFAULT INIT LOADER -----
 // Display Default Project Task + Add Task Modal's HTML + Event Listeners
