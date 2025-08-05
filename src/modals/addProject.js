@@ -111,7 +111,7 @@ export default function addProjectModal(user) {
   projectNameInput.id = "project-name";
   projectNameInput.name = "name";
   projectNameInput.maxLength = 120;
-  projectNameInput.autofocus = true;
+  // projectNameInput.autofocus = true;
   projectNameInput.required = true;
   projectName.appendChild(projectNameInput);
 

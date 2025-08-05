@@ -980,7 +980,7 @@ a {
 @media screen and (max-width: 25em) {
   #addTaskDialog,
   #addProjectDialog {
-    width: 100%;
+    width: 95%;
   }
 }
 
@@ -1122,6 +1122,13 @@ h1.form-header-text {
   font-size: var(--font-size-body);
   line-height: calc(var(--font-size-body) + 7px);
   color: var(--content-primary);
+}
+
+@media screen and (max-width: 25em) {
+  .form .form-row input,
+  .form .form-row select {
+    height: 36px;
+  }
 }
 
 .form .form-row select {

@@ -112,7 +112,7 @@ export default function addTaskModal(user, projectIndex) {
   taskNameInput.name = "name";
   taskNameInput.placeholder = "Submit items by next week";
   taskNameInput.maxLength = 120;
-  taskNameInput.autofocus = true;
+  // taskNameInput.autofocus = true;
   taskNameInput.required = true;
   taskName.appendChild(taskNameInput);
 
