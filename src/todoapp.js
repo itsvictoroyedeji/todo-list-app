@@ -8,6 +8,7 @@ import Project from "./modules/project";
 import TodoFactory from "./modules/todo-factory";
 import SidebarProjects from "./pages/sidebarProjects";
 import AddProjectModal from "./modals/addProject";
+import { de } from "date-fns/locale";
 
 // Add project tasks on page load
 document.addEventListener('DOMContentLoaded',() => {
@@ -27,16 +28,14 @@ let newProjectIndex;
 const mainContent = document.querySelector("#content");
 
 // Initialize default user name and project
-defaultUser = {
+defaultUser = new User({
   name: "Victor",
   projects: [
-    {
-      name: "Testing Project",
-      todos: []
-    }
+    new Project({})
   ]
-};
+});
 
+// Local Storage setup 
 if(!localStorage.getItem("user")) {
   populateStorage();
 } else {
@@ -50,18 +49,23 @@ function populateStorage() {
 
 function setDefaultUser() {
   const userData = localStorage.getItem('user');
-  
   if(userData) {
     defaultUser = JSON.parse(userData);
+
+    // add all methods from user class back to user
+    Object.setPrototypeOf(defaultUser, User.prototype );
+    // console.log("User proto", defaultUser);
+
+    // add all methods from projects class back to projects
+    for (let i = 0 ; i < defaultUser.projects.length ; i++) {
+      Object.setPrototypeOf(defaultUser.projects[i], Project.prototype );
+      // console.log("User + project proto", defaultUser);
+    }
   } else {
-    console.log("User data not found in local storage");
+  console.log("User data not found in local storage");
   }
+  console.log("local storage:", defaultUser);
 }
-
-
-// localStorage.clear();
-
-
 
 // ------- DEFAULT INIT LOADER -----
 // Display Default Project Task + Add Task Modal's HTML + Event Listeners
@@ -229,6 +233,7 @@ export function attachEventListeners() {
             defaultUser.deleteProject(selectedProjectIndex);
             // Reload DOM
             clearModalTextContents();
+            populateStorage(); // => Update local storage
             mainContent.textContent = "";
             initLoader(0);
           }
@@ -307,6 +312,7 @@ export function attachEventListeners() {
         defaultUser.deleteProject(activeProjectIndex);
         // Reload DOM
         clearModalTextContents();
+        populateStorage(); // => Update local storage
         initLoader(0);
       }
     });
@@ -335,6 +341,8 @@ export function attachEventListeners() {
     if (formProjectName.value.length > 0) {
       
       let duplicate;
+
+      // Add a new project
       if (projectSubmitButton.textContent === addText) {
         // Check if there's a duplicate project name
         for (let i = 0; i < defaultUser.projects.length ; i++) {
@@ -357,9 +365,10 @@ export function attachEventListeners() {
           // Reload updated DOM and event listeners with new index
           newProjectIndex = defaultUser.projects.length - 1;
           clearModalTextContents();
+          populateStorage(); // => Update local storage
           initLoader(newProjectIndex);
         }
-       
+      // Edit an existing project 
       } else if (projectSubmitButton.textContent === saveText) {
         // Check if there's a duplicate project name
         for (let i = 0; i < defaultUser.projects.length ; i++) {
@@ -378,11 +387,11 @@ export function attachEventListeners() {
         } else {
           defaultUser.projects[activeProjectIndex].name = formProjectName.value;
           clearModalTextContents();
+          populateStorage(); // => Update local storage
           // Reload updated DOM and event listeners with current index
           initLoader(activeProjectIndex);
         }
       }
-
     } else {
       window.alert("Project name is required");
       return false;
@@ -451,6 +460,7 @@ export function attachEventListeners() {
         defaultUser.projects[activeProjectIndex].deleteTodo(taskItemIndex);
         // Reload DOM
         clearModalTextContents();
+        populateStorage(); // => Update local storage
         initLoader(activeProjectIndex);
       }
     })
@@ -533,7 +543,7 @@ export function attachEventListeners() {
       }
       // Reload updated DOM and event listeners 
       clearModalTextContents();
-      // populateStorage();
+      populateStorage(); // => Update local storage
       initLoader(formTaskProjectIndex);
     } else {
       window.alert("Task name is required");
