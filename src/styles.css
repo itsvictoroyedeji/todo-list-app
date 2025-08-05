@@ -968,14 +968,16 @@ a {
   outline: none !important;
 }
 
-@keyframes modal-dialog {
+
+
+/* @keyframes modal-dialog {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
-}
+} */
 
 #addTaskDialog::backdrop,
 #addProjectDialog::backdrop {
