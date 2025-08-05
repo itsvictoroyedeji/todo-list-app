@@ -137,7 +137,6 @@ export default function addTaskModal(user, projectIndex) {
   taskDescriptionInput.id = "task-description";
   taskDescriptionInput.name = "description";
   taskDescriptionInput.maxLength = 240;
-  taskDescriptionInput.autofocus = true;
   taskDescription.appendChild(taskDescriptionInput);
 
   //         </div>
@@ -163,7 +162,6 @@ export default function addTaskModal(user, projectIndex) {
   taskDatePicker.id = "task-date";
   taskDatePicker.name = "date";
   taskDatePicker.min = new Date().toLocaleDateString('en-CA');
-  taskDatePicker.autofocus = true;
   taskDate.appendChild(taskDatePicker);
 
   console.dir(taskDatePicker);
@@ -187,7 +185,6 @@ export default function addTaskModal(user, projectIndex) {
   const taskPrioritySelect = document.createElement("select");
   taskPrioritySelect.id = "task-priority";
   taskPrioritySelect.name = "task-priority";
-  taskPrioritySelect.autofocus = true;
 
   //             <option value="">Select a priority</option>
   //             <option value="priority 1">
@@ -260,7 +257,6 @@ export default function addTaskModal(user, projectIndex) {
   const taskProjectSelect = document.createElement("select");
   taskProjectSelect.id = "task-project";
   taskProjectSelect.name = "task-project";
-  taskProjectSelect.autofocus = true;
  
   const userProjects = user.projects;
 
