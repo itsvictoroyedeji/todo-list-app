@@ -1252,12 +1252,13 @@ h1.form-header-text {
   min-height: 1.9em;
   border: var(--sidebar-item-hover);
   padding: 0 0.8em;
-  color: rgb(72, 72, 72);
+  color: rgb(17, 17, 17);
   font-size: 0.95rem;
 }
 
 .project-page-add-button {
   font-size: 0.75rem;
+  color: rgb(72, 72, 72);
 }
 
 .add-project-button:hover {
