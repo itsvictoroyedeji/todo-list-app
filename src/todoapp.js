@@ -3,12 +3,11 @@ import { greeting } from "./greetings"; // remove this line and src/greetings.js
 import ProjectTasks from "./pages/projectTasks";
 import ListOfProjects from "./pages/listOfProjects";
 import AddTaskModal from "./modals/addTask";
-import User from "./modules/user";
-import Project from "./modules/project";
-import TodoFactory from "./modules/todo-factory";
+import User from "./interfaces/user";
+import Project from "./interfaces/project";
+import TodoFactory from "./interfaces/todo-factory";
 import SidebarProjects from "./pages/sidebarProjects";
 import AddProjectModal from "./modals/addProject";
-import { de } from "date-fns/locale";
 
 // Add project tasks on page load
 document.addEventListener('DOMContentLoaded',() => {
