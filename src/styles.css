@@ -980,7 +980,7 @@ a {
 @media screen and (max-width: 25em) {
   #addTaskDialog,
   #addProjectDialog {
-    width: 85%;
+    width: 100%;
   }
 }
 
