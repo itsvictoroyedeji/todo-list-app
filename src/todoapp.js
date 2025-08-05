@@ -101,9 +101,9 @@ function initLoader(projectItemIndex) {
 };
 
 export function attachEventListeners() {
-  // Change sidebar's title
-  const sidebarTitle = document.querySelector(".sidebar-username span");
-  sidebarTitle.textContent = `${defaultUser.name}'s Tasks`;
+  // Change sidebar's title (activate on a later day)
+  // const sidebarTitle = document.querySelector(".sidebar-username span");
+  // sidebarTitle.textContent = `${defaultUser.name}'s Tasks`;
 
   // Add Project form event listeners
   const sidebarAddProjectButton = document.querySelector(".sidebar-projects-add button");
