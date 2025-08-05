@@ -1383,6 +1383,16 @@ h1.form-header-text {
   background-color: var(--main-button-hover-background);
 }
 
+.footer {
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+.footer a {
+  color: var(--darker-red);
+  text-decoration: none;
+}
+
 @media screen and (max-width: 46.875em) {
   .app-sidebar-container {
     margin-left: calc(-1 * 280px);
