@@ -995,6 +995,13 @@ a {
   }
 }
 
+@media screen and (max-width: 61.93em) {
+  #addTaskDialog,
+  #addProjectDialog {
+    min-width: initial;
+  }
+}
+
 @media screen and (max-width: 25em) {
   #addTaskDialog,
   #addProjectDialog {
