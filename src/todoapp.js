@@ -473,6 +473,7 @@ export function attachEventListeners() {
       defaultUser.projects[activeProjectIndex].deleteTodo(taskItemIndex);
       // Reload DOM
       clearModalTextContents();
+      populateStorage();
       initLoader(activeProjectIndex);
     })
   )
